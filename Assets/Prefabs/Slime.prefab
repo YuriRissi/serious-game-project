@@ -399,7 +399,7 @@ GameObject:
   - component: {fileID: 1340539750837426475}
   m_Layer: 0
   m_Name: Slime
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -434,7 +434,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxVelocity: 3
-  rb: {fileID: 0}
   minDist: 4
   DropCoin: {fileID: 346971165993035744, guid: c5a892f3295bf3f4aa6eb9aefd1570b0, type: 3}
 --- !u!95 &3399593918018469192
