@@ -3,7 +3,15 @@ guid: b9849e8aa54a7094fb8cb36486acc612
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - EnemyPrefab: {instanceID: 0}
+  - scoreText: {instanceID: 0}
+  - GameOverMenu: {instanceID: 0}
+  - MainMenu: {instanceID: 0}
+  - Lure: {instanceID: 0}
+  - LureE: {instanceID: 0}
+  - LureEE: {instanceID: 0}
+  - Particles: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

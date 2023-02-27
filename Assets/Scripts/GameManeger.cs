@@ -7,15 +7,16 @@ using TMPro;
 
 public class GameManeger : MonoBehaviour
 {
-    public GameObject EnemyPrefab;
+    //public GameObject EnemyPrefab;
     public float SpawnCd = 3f;
     public static int Score = 0;
-
+    public int countSpawn = 0;
 
     public static Vector3 mouseWP;
     public TextMeshProUGUI scoreText;
 
     public List<GameObject> enemysToSpawn;
+    public List<GameObject> boss;
     public GameObject GameOverMenu;
     public GameObject MainMenu;
     public GameObject Lure;
@@ -80,13 +81,19 @@ public class GameManeger : MonoBehaviour
         int nEnemy = Random.Range(0, enemysToSpawn.Count);
         Quaternion newRotation = Quaternion.LookRotation(dir);
 
-        if (nEnemy == 3)
+        //if (nEnemy == 3)
+        //{
+        //    newRotation *= Quaternion.Euler(0, 90, 0);
+        //}
+        if (countSpawn == 30)
         {
-            newRotation *= Quaternion.Euler(0, 90, 0);
+            Instantiate(boss[0], spawnPosition, newRotation);
+            yield break;
         }
-
         Instantiate(enemysToSpawn[nEnemy], spawnPosition, newRotation);
-                                            
+        countSpawn++;
+
+
         yield return new WaitForSeconds(SpawnCd);
 
         yield return SpawnEnemys();
