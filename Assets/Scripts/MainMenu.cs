@@ -10,6 +10,7 @@ public class MainMenu : MonoBehaviour
     public GameManeger gameManeger;
     public TextMeshProUGUI play;
     public TextMeshProUGUI title;
+    public List<TextMeshProUGUI> levelTransition;
     public RectTransform scoreRectTransform;
 
     private void Start()

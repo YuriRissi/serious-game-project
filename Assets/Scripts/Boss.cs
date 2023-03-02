@@ -8,7 +8,7 @@ public class Boss : MonoBehaviour
 {
     public float MaxVelocity =1.5f;
     public float minDist = 2;
-    public int maxHealth = 200;
+    public static int maxHealth = 200;
     public int currentHealth;
 
     private Rigidbody rb;

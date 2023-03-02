@@ -6,11 +6,11 @@ using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
-    public float MaxVelocity = 5f;
+    public static float MaxVelocity;
+    public static float minDist;
     private float Slow = 1f;
     private Rigidbody rb;
     private float distanceEye;
-    public float minDist = 2;
     private bool isCoroutineStarted = false;
 
     public GameObject DropCoin;
