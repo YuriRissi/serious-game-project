@@ -21,7 +21,9 @@ public class GameManeger : MonoBehaviour
    //Aux
     private int countSpawn;
     private int hiddenScore;
-    private bool isCourotineOn;
+    private bool isEnemyCourotineOn;
+    private bool isFireworkCourotineOn;
+    private int countFirework;
 
 
     public List<GameObject> enemysToSpawn;
@@ -35,6 +37,7 @@ public class GameManeger : MonoBehaviour
     public GameObject LureE;
     public GameObject LureEE;
     public GameObject Particles;
+    public GameObject Firework;
 
 
     private static GameManeger instance;
@@ -44,7 +47,7 @@ public class GameManeger : MonoBehaviour
     {
 
         instance = this;
-
+        gameLevel++;
     }
 
     private void OnEnable()
@@ -52,8 +55,9 @@ public class GameManeger : MonoBehaviour
         scoreText.text = "0";
         Score = 0;
         countSpawn = 0;
+        countFirework = 0;
 
-        gameLevel++;
+
         switch (gameLevel)
         {
             case 1:
@@ -62,7 +66,7 @@ public class GameManeger : MonoBehaviour
                 Enemy.minDist = 2.5f;
                 SpawnCd = 4f;
                 levelSpawn = 1;
-                totalSpawn = 2;
+                totalSpawn = 5;
 
                 totalBossSpawn = 0;          
                 
@@ -120,15 +124,15 @@ public class GameManeger : MonoBehaviour
         Lure.SetActive(true);
         Particles.SetActive(true);
         enemysCoroutine = StartCoroutine(SpawnEnemys());
-        isCourotineOn = true;
+        isEnemyCourotineOn = true;
     }
 
 
     private void FixedUpdate()
     {
-        hiddenScore += (Score - hiddenScore);
+        //hiddenScore += (Score - hiddenScore);
         scoreText.text = Score.ToString();
-        Debug.Log(hiddenScore);
+        //Debug.Log(hiddenScore);
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out RaycastHit raycastHit))
@@ -148,14 +152,18 @@ public class GameManeger : MonoBehaviour
             LureEE.SetActive(true);
         }
 
-        if (countSpawn == totalSpawn && !isCourotineOn)
+        if (countSpawn == totalSpawn && !isEnemyCourotineOn)
         {
             GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
             if (enemies.Length == 0)
             {
-                gameObject.SetActive(false);
-                LevelTrasintion.SetActive(true);
-               
+                if (!isFireworkCourotineOn)
+                {
+                    Particles.SetActive(false);
+                    StartCoroutine(SpawnFireworks());
+                    isFireworkCourotineOn = true;
+                }
+                Debug.Log(countFirework);
             }
         }
 
@@ -176,12 +184,12 @@ public class GameManeger : MonoBehaviour
         if (countSpawn == totalSpawn && totalBossSpawn != 0)
         {
             Instantiate(boss[totalBossSpawn - 1], spawnPosition, newRotation);
-            isCourotineOn = false;
+            isEnemyCourotineOn = false;
             yield break;
         }
         else if(countSpawn == totalSpawn && totalBossSpawn == 0)
         {
-            isCourotineOn = false;
+            isEnemyCourotineOn = false;
             yield break;
         }
         Instantiate(enemysToSpawn[nEnemy], spawnPosition, newRotation);
@@ -197,6 +205,7 @@ public class GameManeger : MonoBehaviour
 
     public void GameOver()
     {
+        gameLevel--;
         StopCoroutine(enemysCoroutine);
         gameObject.SetActive(false);
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
@@ -208,12 +217,34 @@ public class GameManeger : MonoBehaviour
         LureEE.SetActive(false);
         Particles.SetActive(false);
 
-        gameLevel--;
 
     }
     public void Enable()
     {
         gameObject.SetActive(true);
+    }
+
+    private IEnumerator SpawnFireworks()
+    {
+        Vector3 ran = Random.insideUnitCircle.normalized;
+        ran *= Random.Range(0f, 10f);
+        var spawnPosition = new Vector3(ran.x, 15f, ran.y);
+
+        Instantiate(Firework, spawnPosition, Quaternion.identity);
+        countFirework++;
+        yield return new WaitForSeconds(0.2f);
+        
+        if (countFirework == 30)
+        {
+            yield return new WaitForSeconds(3f);
+            gameLevel++;
+            gameObject.SetActive(false);
+            LevelTrasintion.SetActive(true);
+            isFireworkCourotineOn = false;
+            yield break;
+        }
+        yield return SpawnFireworks();
+
     }
 
 }

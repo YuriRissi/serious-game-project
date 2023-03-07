@@ -29,11 +29,7 @@ public class Lure : MonoBehaviour
 
             if (health < 1)
                {
-                //gameObject.SetActive(false);
                 GameManeger.Instance.GameOver();
-                
-                    
-
                }
 
         }
