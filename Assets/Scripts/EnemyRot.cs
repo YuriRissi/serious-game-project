@@ -1,65 +1,76 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class Enemy : MonoBehaviour
+
+public class EnemyRot : MonoBehaviour
 {
     public static float MaxVelocity;
     public static float minDist;
-    public float slow = 1f;
-    public float distanceEye;
-    public bool isCoroutineStarted = false;
+    private float Slow = 1f;
+    private Rigidbody rb;
+    private float distanceEye;
+    private bool isCoroutineStarted = false;
 
     public GameObject DropCoin;
 
-    public Vector3 MoveDirection()
+    private void Start()
     {
+        rb = GetComponent<Rigidbody>();
+
+    }
+    void FixedUpdate()
+    {
+
         transform.LookAt(GameObject.FindGameObjectWithTag("Lure").transform.position);
         var heading = GameObject.FindGameObjectWithTag("Lure").transform.position - transform.position;
         var distance = heading.magnitude;
         var direction = heading / distance;
         Vector3 dir = direction;
-        return dir;
-    }
-    public void DistanceMonitoring(float dist)
-    {
+        Vector3 dirRotate = Quaternion.Euler(0, 90, 0) * dir * 2;
+
+        rb.velocity = (dir * 0.3f + dirRotate) * MaxVelocity * Slow;
+
         distanceEye = Vector3.Distance(GameManeger.mouseWP, transform.position);
-        if (distanceEye < dist && !isCoroutineStarted)
+        if (distanceEye < minDist && !isCoroutineStarted)
         {
             StartCoroutine(KillEnemys());
             isCoroutineStarted = true;
-
+          
         }
-        else if (distanceEye > dist && isCoroutineStarted)
+        else if (distanceEye > minDist && isCoroutineStarted)
         {
-            slow = 1f;
+            Slow = 1f;
             StopAllCoroutines();
             isCoroutineStarted = false;
         }
-
+        
+      
     }
-    public void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Lure"))
         {
-            Destroy(gameObject);
+            Destroy(gameObject);  
         }
     }
 
-    public IEnumerator KillEnemys()
+    private IEnumerator KillEnemys()
     {
-        slow = 0.1f;
+        Slow = 0.1f;
         yield return new WaitForSeconds(1.5f);
 
         DestroyEnemy();
         GameManeger.Score++;
 
-        yield break;
+        yield break;     
     }
-    public void DestroyEnemy()
+    private void DestroyEnemy()
     {
         Vector3 position = transform.position;
-        Instantiate(DropCoin, new Vector3(position.x, 1f, position.z), Quaternion.Euler(-90, 0, 0));
+        Instantiate(DropCoin, new Vector3(position.x, 1f, position.z) , Quaternion.Euler(-90, 0, 0));
         Destroy(gameObject);
     }
 }
+

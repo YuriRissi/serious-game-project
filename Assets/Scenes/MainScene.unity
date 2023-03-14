@@ -5165,6 +5165,7 @@ MonoBehaviour:
   - {fileID: 2907980206703453645, guid: fd09610b12d193a4c8a2e3029cb42dc1, type: 3}
   - {fileID: 2922143118892191904, guid: 5a8cb207ee359b246a3c055532c573c1, type: 3}
   - {fileID: 1396464725390000128, guid: 1eeeba5afe7eb57499bf455a0bb8582c, type: 3}
+  - {fileID: 8976040854424709452, guid: 318f92922f3f9f9488ca79337a4128a5, type: 3}
   boss:
   - {fileID: 6035539392206391623, guid: 8efb70447a3a86a4b9e0b2493be5ad1d, type: 3}
   GameOverMenu: {fileID: 48637044}
@@ -5494,7 +5495,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 0.7955801, y: 1}
+    m_SensorSize: {x: 1.2872928, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0

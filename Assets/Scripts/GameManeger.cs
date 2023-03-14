@@ -23,6 +23,7 @@ public class GameManeger : MonoBehaviour
     private int hiddenScore;
     private bool isEnemyCourotineOn;
     private bool isFireworkCourotineOn;
+    private bool isFinalLevel = false;
     private int countFirework;
 
 
@@ -68,8 +69,10 @@ public class GameManeger : MonoBehaviour
                 levelSpawn = 1;
                 totalSpawn = 5;
 
-                totalBossSpawn = 0;          
-                
+                totalBossSpawn = 0;
+
+                isFinalLevel = false;
+
                 break;
 
             case 2:
@@ -157,13 +160,22 @@ public class GameManeger : MonoBehaviour
             GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
             if (enemies.Length == 0)
             {
-                if (!isFireworkCourotineOn)
+                if (!isFinalLevel)
+                {
+                    if (!isFireworkCourotineOn)
+                    {
+                        Particles.SetActive(false);
+                        StartCoroutine(SpawnFireworks(30));
+                        isFireworkCourotineOn = true;
+                    }
+                }
+                else
                 {
                     Particles.SetActive(false);
-                    StartCoroutine(SpawnFireworks());
+                    StartCoroutine(SpawnFireworks(60));
                     isFireworkCourotineOn = true;
                 }
-                Debug.Log(countFirework);
+               
             }
         }
 
@@ -224,7 +236,7 @@ public class GameManeger : MonoBehaviour
         gameObject.SetActive(true);
     }
 
-    private IEnumerator SpawnFireworks()
+    private IEnumerator SpawnFireworks(int total)
     {
         Vector3 ran = Random.insideUnitCircle.normalized;
         ran *= Random.Range(0f, 10f);
@@ -234,7 +246,7 @@ public class GameManeger : MonoBehaviour
         countFirework++;
         yield return new WaitForSeconds(0.2f);
         
-        if (countFirework == 30)
+        if (countFirework == total)
         {
             yield return new WaitForSeconds(3f);
             gameLevel++;
@@ -243,7 +255,7 @@ public class GameManeger : MonoBehaviour
             isFireworkCourotineOn = false;
             yield break;
         }
-        yield return SpawnFireworks();
+        yield return SpawnFireworks(total);
 
     }
 

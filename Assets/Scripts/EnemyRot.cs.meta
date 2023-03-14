@@ -1,9 +1,11 @@
 fileFormatVersion: 2
-guid: b509ae6ccb3cb8e4da998af1a56fab88
+guid: b086a595a885da2469151eb66d7302e7
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - rb: {instanceID: 0}
+  - DropCoin: {fileID: 346971165993035744, guid: c5a892f3295bf3f4aa6eb9aefd1570b0, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

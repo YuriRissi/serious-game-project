@@ -234,7 +234,7 @@ GameObject:
   - component: {fileID: 3622070884417681438}
   - component: {fileID: 3622070884417681437}
   - component: {fileID: 3622070884417681439}
-  - component: {fileID: 3622070884417681436}
+  - component: {fileID: -7897646850091604330}
   m_Layer: 0
   m_Name: MiniOrc
   m_TagString: Enemy
@@ -308,7 +308,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &3622070884417681436
+--- !u!114 &-7897646850091604330
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -320,8 +320,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efd406feeafafef4e8e4e3c0de225603, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxVelocity: 3
-  minDist: 4
   DropCoin: {fileID: 346971165993035744, guid: c5a892f3295bf3f4aa6eb9aefd1570b0, type: 3}
 --- !u!1 &7158589293425390812
 GameObject:
