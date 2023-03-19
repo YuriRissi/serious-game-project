@@ -2,13 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using TMPro;
 
 public class GameOverMenu : MonoBehaviour
 {
-   public void Restart()
+    public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI restart;
+    private void OnEnable()
     {
+        scoreText.text = GameManeger.totalScore.ToString();
+        restart.gameObject.LeanScale(new Vector3(1.05f, 1.05f), 0.3f).setLoopPingPong();
+    }
+    public void Restart()
+    {
+        GameManeger.Instance.RestartParameters();
         gameObject.SetActive(false);
         GameManeger.Instance.Enable();
+        StopAllCoroutines();
     }
 
    public void Quit()

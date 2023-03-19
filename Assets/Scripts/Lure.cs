@@ -5,27 +5,31 @@ using Cinemachine;
 
 public class Lure : MonoBehaviour
 {
-    private int health = 0;
     private CinemachineImpulseSource cinemachineImpulseSource;
     public List<GameObject> Lifes;
-    private int i = 0;
-
+    
+    private int health;
+    private int j;
+    private int damage;
+    public static float percentageLifeRemaining;
     void Start()
     {
-        health = 3;
+        ResetGameLife();
         cinemachineImpulseSource = GetComponent<CinemachineImpulseSource>();
-        Lifes[0].SetActive(true);
-        Lifes[1].SetActive(true);
-        Lifes[2].SetActive(true);
     }
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
+            damage = GameManeger.Instance.GetEnemyDamage();
             cinemachineImpulseSource.GenerateImpulse();
-            Lifes[i].SetActive(false);
-            health--;
-            i++;
+            for(int i = 1; i <= damage; ++i)
+            {
+                Lifes[j].SetActive(false);
+                health--;
+                j++;
+            }
+            percentageLifeRemaining = (float)health / Lifes.Count;
 
             if (health < 1)
                {
@@ -37,11 +41,14 @@ public class Lure : MonoBehaviour
 
     private void OnEnable()
     {
-        health = 3;
-        i = 0;
-        Lifes[0].SetActive(true);
-        Lifes[1].SetActive(true);
-        Lifes[2].SetActive(true);
+        ResetGameLife();
+    }
+    public void ResetGameLife()
+    {
+        health = Lifes.Count;
+        j = 0;
+        percentageLifeRemaining = 1f;
+        GameManeger.Instance.ListSetActive(Lifes, true);
     }
 
 }

@@ -1,23 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-
-public class FastEnemy : Enemy
+public class MediocreEnemy : Enemy
 {
     private Rigidbody rb;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
+
+        points = 4;
+        maxHealth = 80;
+        damage = 2;
+        LifeModularizer();
     }
     void FixedUpdate()
     {
         Vector3 dir = MoveDirection();
-        rb.velocity = MaxVelocity * slow * dir;
-        DistanceMonitoring(minDist);
+        MoveSpeed(rb, dir, 1.4f);
+        DistanceMonitoring(0.4f);
     }
-
 }
-

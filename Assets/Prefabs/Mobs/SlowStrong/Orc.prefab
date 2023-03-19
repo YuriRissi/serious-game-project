@@ -1390,7 +1390,7 @@ GameObject:
   - component: {fileID: 6379731183968097273}
   - component: {fileID: 6379731183968097278}
   - component: {fileID: 6379731183968097276}
-  - component: {fileID: 7161548547296277466}
+  - component: {fileID: -3047689241681157933}
   m_Layer: 0
   m_Name: Orc
   m_TagString: Enemy
@@ -1406,7 +1406,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6035539392206391623}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 11.764999, y: 0.25, z: -17.517052}
+  m_LocalPosition: {x: -6.6, y: 0.25, z: -6.9164467}
   m_LocalScale: {x: 1.3, y: 1.3, z: 1.3}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -1466,7 +1466,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &7161548547296277466
+--- !u!114 &-3047689241681157933
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1475,13 +1475,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 6035539392206391623}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a309936b99a368c4c88007b7fc09e353, type: 3}
+  m_Script: {fileID: 11500000, guid: da8a0f4cb0cc9dc4bae878d02396ca57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxVelocity: 1.5
-  minDist: 2
-  maxHealth: 200
+  maxHealth: 0
   currentHealth: 0
+  points: 0
   DropCoin: {fileID: 346971165993035744, guid: c5a892f3295bf3f4aa6eb9aefd1570b0, type: 3}
   healthBar: {fileID: 7443121707951178759}
 --- !u!1 &6079477114020351119
@@ -2005,7 +2004,7 @@ RectTransform:
   m_GameObject: {fileID: 7443121708064437549}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.006, y: 0.006, z: 0.006}
+  m_LocalScale: {x: 0.0055, y: 0.0055, z: 0.0055}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 7443121707951178752}
@@ -2014,7 +2013,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 3.78}
+  m_AnchoredPosition: {x: 0, y: 3.47}
   m_SizeDelta: {x: 420.5823, y: 90.8735}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &7443121708064437538

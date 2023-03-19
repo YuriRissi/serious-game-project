@@ -10,7 +10,6 @@ public class MainMenu : MonoBehaviour
     public GameManeger gameManeger;
     public TextMeshProUGUI play;
     public TextMeshProUGUI title;
-    public List<TextMeshProUGUI> levelTransition;
     public RectTransform scoreRectTransform;
 
     private void Start()
@@ -21,15 +20,16 @@ public class MainMenu : MonoBehaviour
     }
     public void Play()
     {
-        GetComponent<CanvasGroup>().LeanAlpha(0, 0.2f).setOnComplete(onComplete);
+        GetComponent<CanvasGroup>().LeanAlpha(0, 0.2f).setOnComplete(OnComplete);
        
     }
 
-    private void onComplete()
+    private void OnComplete()
     {
         scoreRectTransform.LeanMoveY(-60.4f, 0.75f).setEaseOutBounce();
 
         gameManeger.Enable();
         Destroy(gameObject);
     }
+
 }

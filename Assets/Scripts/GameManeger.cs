@@ -3,139 +3,322 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.IO;
 
 
 public class GameManeger : MonoBehaviour
 {
     public static Vector3 mouseWP;
     public TextMeshProUGUI scoreText;
-    public static int Score = 0;
+    public static int totalScore;
+    public static int levelScore;
     public static int gameLevel;
+    public static float performance;
 
     //Level modelation
-    private float SpawnCd;
-    private int totalBossSpawn;
-    private int levelSpawn;
     private int totalSpawn;
-    
-   //Aux
+    private List<GameObject> enemiesToSpawn;
+    private bool isUnilateral;
+    private int simultaneousAllowed;
+
+    private int less40;
+    private int btw40n50;
+    private int btw50n60;
+    private int btw60n80;
+    private int more80;
+
+    //Aux
     private int countSpawn;
-    private int hiddenScore;
-    private bool isEnemyCourotineOn;
-    private bool isFireworkCourotineOn;
-    private bool isFinalLevel = false;
     private int countFirework;
+    private int countIncrementModularization;
+    private bool isSpawnCourotineOn;
+    private bool isFireworkCourotineOn;
+    private bool isFinalLevel;
+    private bool isEndLevelCalled;
+    private int winStreak;
+    private int loseStreak;
+    private int repeatLevel;
+    private string levelDescription;
+    private int levelMultiplier;
+    private float scoreMultiplier;
+    private float winStreakMult;
+    private float modulHealthMult;
+    private float modulSpeedMult;
+    private int enemyDamage;
 
 
-    public List<GameObject> enemysToSpawn;
-    public List<GameObject> boss;
+    private GameObject[] instantiatedEnemies;
+    private int toggle;
 
-    public GameObject GameOverMenu;
+    //GameObjects
+    public List<GameObject> enemyA;
+    public List<GameObject> enemyB;
+    public List<GameObject> enemyC;
+    public List<GameObject> enemyD;
+
     public GameObject MainMenu;
-    public GameObject LevelTrasintion;
+    public GameObject GameOverMenu;
+    public GameObject FinalMenu;
+    public GameObject LevelTrasintionCanvas;
+    public GameObject ScoreCanvas;
+    public GameObject LifeMenu;
 
-    public GameObject Lure;
-    public GameObject LureE;
-    public GameObject LureEE;
+    public GameObject LureGameObject;
+    public List<GameObject> fillLure;
     public GameObject Particles;
     public GameObject Firework;
 
 
     private static GameManeger instance;
-    private Coroutine enemysCoroutine;
+    private Coroutine spwanCoroutine;
     public static GameManeger Instance => instance;
     void Awake()
     {
 
         instance = this;
+
         gameLevel++;
+        instantiatedEnemies = new GameObject[0];
+        enemiesToSpawn = new List<GameObject>();
+
+        Enemy.modularizedHealth = 1f;
+        Enemy.modularizedSpeed = 1f;
+        Enemy.minDist = 2.5f;
+
+
+        scoreText.text = "0";
+        toggle = 1;
     }
 
     private void OnEnable()
     {
-        scoreText.text = "0";
-        Score = 0;
         countSpawn = 0;
         countFirework = 0;
+        levelMultiplier = 0;
+        levelScore = 0;
+        isUnilateral = false;
+        isFinalLevel = false;
+        isEndLevelCalled = false;
+        enemiesToSpawn.Clear();
 
 
         switch (gameLevel)
         {
             case 1:
 
-                Enemy.MaxVelocity = 3f;
-                Enemy.minDist = 2.5f;
-                SpawnCd = 4f;
-                levelSpawn = 1;
-                totalSpawn = 5;
+                levelDescription = "Fase 1";
 
-                totalBossSpawn = 0;
+                BuildEnimiesToSpwanList(0, 0, 0, 1);
+                isUnilateral = true;
+                simultaneousAllowed = 2;
+                totalSpawn = 6;
 
-                isFinalLevel = false;
+                less40 = 1;
+                btw40n50 = btw50n60 = btw60n80 = more80 = 2;
 
                 break;
 
             case 2:
 
-                Enemy.MaxVelocity = 3.5f;
-                Enemy.minDist = 2.5f;
-                SpawnCd = 3.5f;
-                levelSpawn = 2;
-                totalSpawn = 15;
+                levelDescription = "Fase 2 tipo X";
 
-                totalBossSpawn = 0;
+                BuildEnimiesToSpwanList(0, 0, 0, 1);
+                simultaneousAllowed = 1;
+                totalSpawn = 6;
+
+                less40 = btw40n50 = btw50n60 = btw60n80 = more80 = 1;
+
+                repeatLevel++;
 
                 break;
 
             case 3:
 
-                Enemy.MaxVelocity = 4f;
-                Enemy.minDist = 2f;
-                SpawnCd = 3f;
-                levelSpawn = 3;
-                totalSpawn = 20;
+                levelDescription = "Fase 2 tipo Y";
 
-                totalBossSpawn = 0;
+                BuildEnimiesToSpwanList(1, 0, 0, 1);
+                simultaneousAllowed = 2;
+                totalSpawn = 8;
+
+                less40 = btw40n50 = btw50n60 = 0;
+                btw60n80 = more80 = 1;
+                levelMultiplier = 2 - repeatLevel;
 
                 break;
 
             case 4:
 
-                Enemy.MaxVelocity = 4f;
-                Enemy.minDist = 2f;
-                SpawnCd = 3f;
-                levelSpawn = 4;
-                totalSpawn = 30;
+                levelDescription = "Fase 3 - Primeira repetição";
 
-                totalBossSpawn = 1;
-                Boss.maxHealth = 200;
+                BuildEnimiesToSpwanList(1, 0, 0, 0);
+                simultaneousAllowed = 2;
+                totalSpawn = 10;
+
+                less40 = btw40n50 = btw50n60 = btw60n80 = more80 = 1;
+                
+                break;
+
+            case 5:
+
+                levelDescription = "Fase 3 - Segunda repetição";
+
+                BuildEnimiesToSpwanList(1, 0, 0, 0);
+                simultaneousAllowed = 2;
+                totalSpawn = 10;
+
+                less40 = btw40n50 = btw50n60 = btw60n80 = more80 = 1;
 
                 break;
 
-            default:
+            case 6:
 
-                Enemy.MaxVelocity = 2f;
-                Enemy.minDist = 3f;
-                SpawnCd = 4.5f;
-                levelSpawn = 1;
-                totalSpawn = 15;
-                totalBossSpawn = 0;
+                levelDescription = "Fase 4 - Primeira repetição";
+
+                BuildEnimiesToSpwanList(0, 0, 1, 0);
+                simultaneousAllowed = 1;
+                totalSpawn = 3;
+
+                less40 = btw40n50 = btw50n60 = btw60n80 = more80 = 1;
 
                 break;
+
+            case 7:
+
+                levelDescription = "Fase 4 - Segunda repetição";
+
+                BuildEnimiesToSpwanList(0, 0, 1, 0);
+                simultaneousAllowed = 1;
+                totalSpawn = 3;
+
+                less40 = btw40n50 = btw50n60 = btw60n80 = more80 = 1;
+
+                break;
+
+            case 8:
+
+                levelDescription = "Fase 5 - Primeira repetição";
+
+                BuildEnimiesToSpwanList(0, 1, 0, 0);
+                simultaneousAllowed = 2;
+                totalSpawn = 7;
+
+                less40 = btw40n50 = btw50n60 = btw60n80 = more80 = 1;
+
+                break;
+
+            case 9:
+
+                levelDescription = "Fase 5 - Segunda repetição";
+
+                BuildEnimiesToSpwanList(0, 1, 0, 0);
+                simultaneousAllowed = 2;
+                totalSpawn = 7;
+
+                less40 = btw40n50 = btw50n60 = btw60n80 = more80 = 1;
+
+                break;
+
+            case 10:
+
+                levelDescription = "Fase 6 - Default";
+
+                BuildEnimiesToSpwanList(2, 4, 0, 1);
+                simultaneousAllowed = 2;
+                totalSpawn = 12;
+
+                less40 =  1;
+                btw40n50 = btw50n60 = 0;
+                btw60n80 = 3;
+                more80 = 4;
+
+                break;
+            
+            case 11:
+
+                levelDescription = "Fase 6 - Desempenho menor que 40% na última tentativa";
+
+                BuildEnimiesToSpwanList(2, 4, 0, 0);
+                simultaneousAllowed = 2;
+                totalSpawn = 9;
+
+                less40 = btw40n50 = btw50n60 = 1;
+                btw60n80 = more80 = 2;
+
+                repeatLevel =  1;
+
+                break;
+
+            case 12:
+
+                levelDescription = "Fase 6 - Desempenho menor que 60% na última tentativa";
+
+                BuildEnimiesToSpwanList(2, 4, 0, 1);
+                simultaneousAllowed = 1;
+                totalSpawn = 9;
+
+                less40 = btw40n50 = btw50n60 = 0;
+                btw60n80 = more80 = 1;
+
+                break;
+
+            case 13:
+
+                levelDescription = "Fase 7 - Default";
+
+                BuildEnimiesToSpwanList(2, 4, 1, 1);
+                simultaneousAllowed = 2;
+                totalSpawn = 12;
+
+                less40 = btw40n50 = btw50n60 = 2;
+                btw60n80 = more80 = 3;
+                levelMultiplier = 4 - repeatLevel;
+
+                repeatLevel = 1;
+
+                break;
+
+            case 14:
+
+                levelDescription = "Fase 7 - Improve";
+
+                BuildEnimiesToSpwanList(2, 4, 1, 1);
+                simultaneousAllowed = 3;
+                totalSpawn = 12;
+
+                less40 = btw40n50 = btw50n60 = 1;
+                btw60n80 = more80 = 2;
+                levelMultiplier = 5;
+
+                repeatLevel = 1;
+
+                break;
+
+            case 15:
+
+                levelDescription = "Fase 7 - Desempenho menor que 60% - repetir último nível;";
+
+                BuildEnimiesToSpwanList(2, 4, 1, 1);
+                simultaneousAllowed = 9;
+                totalSpawn = 5;
+
+                less40 = btw40n50 = btw50n60 = 0;
+                btw60n80 = more80 = 1;
+
+                break;
+
         }
 
-        Lure.SetActive(true);
-        Particles.SetActive(true);
-        enemysCoroutine = StartCoroutine(SpawnEnemys());
-        isEnemyCourotineOn = true;
+        SetActiveGameInterface(true);
+        spwanCoroutine = StartCoroutine(SpawnEnemys());
+        isSpawnCourotineOn = true;
     }
 
 
     private void FixedUpdate()
     {
-        //hiddenScore += (Score - hiddenScore);
-        scoreText.text = Score.ToString();
-        //Debug.Log(hiddenScore);
+        scoreText.text = totalScore.ToString();
+        instantiatedEnemies = GameObject.FindGameObjectsWithTag("Enemy");
+        Debug.Log(levelDescription);
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out RaycastHit raycastHit))
@@ -145,90 +328,164 @@ public class GameManeger : MonoBehaviour
 
         }
 
-        if(hiddenScore >= 30)
+        if(totalScore >= 50)
         {
-            LureE.SetActive(true);
+            fillLure[0].SetActive(true);
         }
 
-        if (hiddenScore >= 60)
+        if (totalScore >= 100)
         {
-            LureEE.SetActive(true);
+            fillLure[1].SetActive(true);
         }
 
-        if (countSpawn == totalSpawn && !isEnemyCourotineOn)
+        if (countSpawn == totalSpawn && !isSpawnCourotineOn && instantiatedEnemies.Length == 0 && !isEndLevelCalled)
         {
-            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-            if (enemies.Length == 0)
-            {
-                if (!isFinalLevel)
-                {
-                    if (!isFireworkCourotineOn)
-                    {
-                        Particles.SetActive(false);
-                        StartCoroutine(SpawnFireworks(30));
-                        isFireworkCourotineOn = true;
-                    }
-                }
-                else
-                {
-                    Particles.SetActive(false);
-                    StartCoroutine(SpawnFireworks(60));
-                    isFireworkCourotineOn = true;
-                }
-               
-            }
+            EndLevel();
+            isEndLevelCalled = true;
+
+            if (!isFireworkCourotineOn)
+            {        
+                StartCoroutine(SpawnFireworks((isFinalLevel ? 60 : 30)));
+                isFireworkCourotineOn = true;
+            }            
         }
+
+        if (Enemy.modularizedHealth < 0.4f) Enemy.modularizedHealth = 0.4f;
+        if (Enemy.modularizedSpeed < 0.5f) Enemy.modularizedSpeed = 0.6f;
+    }
+
+    private void BuildEnimiesToSpwanList(int occurrenceA, int occurrenceB, int occurrenceC, int occurrenceD)
+    {
+        for (int i = 0; i < occurrenceA; i++)
+        {
+            enemiesToSpawn.AddRange(enemyA);
+        }
+        for (int i = 0; i < occurrenceB; i++)
+        {
+            enemiesToSpawn.AddRange(enemyB);
+        }
+        for (int i = 0; i < occurrenceC; i++)
+        {
+            enemiesToSpawn.AddRange(enemyC);
+        }
+        for (int i = 0; i < occurrenceD; i++)
+        {
+            enemiesToSpawn.AddRange(enemyD);
+        }
+    }
+    private IEnumerator SpawnEnemys()
+    {
+
+        Vector3 unitCircle = Random.insideUnitCircle.normalized;
+        var spawnCircle = unitCircle * 19.5f;
+        Vector3 spawnPosition;
+
+        if (isUnilateral)
+        {
+            var rangeX = Random.Range(-6f, 6f);
+            var rangeY = Random.Range(15f, 19.5f);
+            spawnPosition = new Vector3(rangeX, 0.25f, toggle * rangeY);
+        }
+        else 
+        {
+            spawnPosition = new Vector3(spawnCircle.x, 0.25f, spawnCircle.y); 
+        }
+        
+        
+        int index = Random.Range(0, enemiesToSpawn.Count);
+
+        if (countSpawn == totalSpawn)
+        {
+            isSpawnCourotineOn = false;
+            yield break;
+        }
+        if (instantiatedEnemies.Length < simultaneousAllowed)
+        {
+            Instantiate(enemiesToSpawn[index], spawnPosition, Quaternion.identity);
+            countSpawn++;
+            toggle *= -1;
+        }
+
+        yield return new WaitForSeconds(2f);
+        yield return SpawnEnemys();
 
     }
 
-
-    private IEnumerator SpawnEnemys()
+    private void EndLevel()
     {
-        Vector3 ran = Random.insideUnitCircle.normalized;
-        ran *= Random.Range(15f, 19.5f);
-        var spawnPosition = new Vector3(ran.x, 0.25f, ran.y);
+        var levelIncrement = ModularizeRemainingLife(less40, btw40n50, btw50n60, btw60n80, more80);
+        gameLevel += levelIncrement;
 
-        Vector3 dir = new Vector3(0, 0.25f, 0) - spawnPosition;
-
-        int nEnemy = Random.Range(0, levelSpawn);
-        Quaternion newRotation = Quaternion.LookRotation(dir);
-
-        if (countSpawn == totalSpawn && totalBossSpawn != 0)
+        if (levelIncrement == 0)
         {
-            Instantiate(boss[totalBossSpawn - 1], spawnPosition, newRotation);
-            isEnemyCourotineOn = false;
-            yield break;
+            repeatLevel++;
         }
-        else if(countSpawn == totalSpawn && totalBossSpawn == 0)
+        else
         {
-            isEnemyCourotineOn = false;
-            yield break;
+            winStreak++;
         }
-        Instantiate(enemysToSpawn[nEnemy], spawnPosition, newRotation);
-        countSpawn++;
+        loseStreak = 0;
 
-        
+        if (gameLevel == 2)
+        {
+            winStreak--;
+            GenerateTextData();
+        }
+        else if (gameLevel == 3 && repeatLevel >= 3)
+        {
+            GenerateTextData();
+            Enemy.modularizedHealth -= 0.2f;
+            repeatLevel = 2;
+        }
+        else if(gameLevel == 17)
+        {
+            totalScore = (totalScore - levelScore) + levelScore * 4;
+            levelScore *= 3;
+            GenerateTextData();
+        }
+        else if (gameLevel > 15 || repeatLevel >= 3)
+        {
+            isFinalLevel = true;
+            GenerateTextData();
+        }
+        else GenerateTextData();
 
+        if(performance >= 70) countIncrementModularization++;
+        else countIncrementModularization = 0;
 
-        yield return new WaitForSeconds(SpawnCd);
-
-        yield return SpawnEnemys();
+        if (countIncrementModularization == 2) Enemy.modularizedHealth += 0.2f;
+        if (countIncrementModularization == 3) Enemy.modularizedSpeed += 0.2f;
     }
 
     public void GameOver()
     {
-        gameLevel--;
-        StopCoroutine(enemysCoroutine);
-        gameObject.SetActive(false);
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        foreach (GameObject enemy in enemies)
-        GameObject.Destroy(enemy);
-        GameOverMenu.SetActive(true);
-        Lure.SetActive(false);
-        LureE.SetActive(false);
-        LureEE.SetActive(false);
-        Particles.SetActive(false);
+        StopCoroutine(spwanCoroutine);
 
+        performance = 0;
+        foreach (GameObject enemy in instantiatedEnemies)
+        {
+            GameObject.Destroy(enemy);
+        }
+
+        loseStreak++;
+        repeatLevel++;
+        if (loseStreak == 1) Enemy.modularizedHealth -= 0.1f;
+        if (loseStreak == 2) Enemy.modularizedSpeed -= 0.1f;
+        winStreak = 0;
+        if (loseStreak >= 3)
+        {
+            GameOverMenu.SetActive(true);
+            SetActiveGameInterface(false);
+            gameObject.SetActive(false);
+        }
+        else
+        {
+            LevelTrasintion.nextLevel = false;
+            LevelTrasintionCanvas.SetActive(true);
+            SetActiveGameInterface(false);
+            gameObject.SetActive(false);
+        }
+        GenerateTextData();
 
     }
     public void Enable()
@@ -248,14 +505,139 @@ public class GameManeger : MonoBehaviour
         
         if (countFirework == total)
         {
-            yield return new WaitForSeconds(3f);
-            gameLevel++;
-            gameObject.SetActive(false);
-            LevelTrasintion.SetActive(true);
+            yield return new WaitForSeconds(2f);
             isFireworkCourotineOn = false;
+
+            if (isFinalLevel)
+            {
+                FinalMenu.SetActive(true);
+                SetActiveGameInterface(false);
+                gameObject.SetActive(false);
+            }
+            else
+            {
+                LevelTrasintion.nextLevel = true;
+                LevelTrasintionCanvas.SetActive(true);
+                SetActiveGameInterface(false);
+                gameObject.SetActive(false);
+            }
+
             yield break;
         }
         yield return SpawnFireworks(total);
+
+    }
+    public void ListSetActive(List<GameObject> list, bool boolean)
+    {
+        foreach (GameObject gameobject in list)
+        {
+            gameobject.SetActive(boolean);
+        }
+    }
+
+    public void RestartParameters()
+    {
+        gameLevel = 1;
+        totalScore = 0;
+        loseStreak = 0;
+        winStreak = 0;
+        repeatLevel = 0;
+        countIncrementModularization = 0;
+        Enemy.modularizedHealth = 1f;
+        Enemy.modularizedSpeed = 1f;
+    }
+
+    private void SetActiveGameInterface(bool boolean)
+    {
+        LureGameObject.SetActive(boolean);
+        if(!boolean) ListSetActive(fillLure, boolean);
+        Particles.SetActive(boolean);
+        LifeMenu.SetActive(boolean);
+        ScoreCanvas.SetActive(boolean);
+    }
+
+    public IEnumerator FinalFireworks()
+    {
+        Vector3 ran = Random.insideUnitCircle.normalized;
+        ran *= 3f;
+        var spawnPosition = new Vector3(ran.x, 15f, ran.y);
+
+        Instantiate(Firework, spawnPosition, Quaternion.identity);
+
+        yield return new WaitForSeconds(2f);
+
+        yield return FinalFireworks();
+
+    }
+
+    public void GenerateTextData()
+    {
+        //Path of the file
+        string path = Application.dataPath + "/LOG.txt";
+        //Create File if it doesn't exist
+        if (!File.Exists(path))
+        {
+            File.WriteAllText(path, "");
+        }
+        //Content of the file
+        string content = "";
+        if (gameLevel == 1) content = "\n\n-----------------Nova sessão-----------------n\n";
+         content += "\n\n" + levelDescription + "- " + (performance == 0f ? "DERROTA" : "SUCESSO") + "\n\n";
+         content += "isFinalLevel: " + isFinalLevel + "\n";
+         content += "Pontuação no nível: " + levelScore + "\n";
+         content += "Pontuação total: " + totalScore + "\n";
+         content += "N.Inimigos: " + totalSpawn + "\n";
+         content += "Sequência de vitórias: " + winStreak + "\n";
+         content += "Sequência de derrotas: " + loseStreak + "\n";
+         content += "N. Repetição de nível: " + repeatLevel + "\n";
+         content += "Vidas restantes: " + performance + "%" + "\n";
+         content += "Modularização de vida: " + Enemy.modularizedHealth + "\n";
+         content += "Modularização de velocidade: " + Enemy.modularizedSpeed + "\n";
+         content += "Multiplicador do nível: " + levelMultiplier + "x" + "\n";
+         content += "Multiplicador winStreak: " + winStreakMult + "x" + "\n";
+         content += "Multiplicador de modularização da vida: " + modulHealthMult + "x" + "\n";
+         content += "Multiplicador de modularização da velocidade: " + modulSpeedMult + "x" + "\n";
+         content += "Multiplicador total: " + scoreMultiplier + "x" + "\n";
+         content += "\nLog Date: " + System.DateTime.Now + "\n";
+
+        //Add some text to it
+        File.AppendAllText(path, content);
+    }
+    private int ModularizeRemainingLife(int less40, int btw40n50, int btw50n60, int btw60n80, int more80)
+    {
+        var percentage = Lure.percentageLifeRemaining;
+        performance = percentage * 100;
+        if (percentage <= 0.4f) return less40;
+        else if (percentage > 0.4f && percentage < 0.5f) return btw40n50;
+        else if (percentage >= 0.5f && percentage < 0.6f) return btw50n60;
+        else if (percentage >= 0.6f && percentage < 0.8f) return btw60n80;
+        else if (percentage >= 0.8f) return more80;
+        else return 0;
+    }
+
+    public void IncrementScore(int score)
+    {
+        winStreakMult = ((float)winStreak / 10) * 2;
+        modulHealthMult = (Enemy.modularizedHealth - 1) * 2;
+        modulSpeedMult = (Enemy.modularizedSpeed - 1) * 2;
+        scoreMultiplier = 1 + levelMultiplier + winStreakMult + modulHealthMult + modulSpeedMult;
+        if (scoreMultiplier < 0.5f) scoreMultiplier = 0.5f;
+        var calculateScore = Mathf.RoundToInt(score * scoreMultiplier);
+        levelScore += calculateScore;
+        totalScore += calculateScore;
+    }
+
+    public void SetEnemyDamage(int damage)
+    {
+        
+        enemyDamage = damage;
+        
+    }
+
+    public int GetEnemyDamage()
+    {
+
+        return enemyDamage;
 
     }
 
