@@ -35,6 +35,7 @@ public class GameManeger : MonoBehaviour
     private bool isFireworkCourotineOn;
     private bool isFinalLevel;
     private bool isEndLevelCalled;
+    private int enemyDamage;
     private int winStreak;
     private int loseStreak;
     private int repeatLevel;
@@ -44,7 +45,7 @@ public class GameManeger : MonoBehaviour
     private float winStreakMult;
     private float modulHealthMult;
     private float modulSpeedMult;
-    private int enemyDamage;
+    private float camPosition;
 
 
     private GameObject[] instantiatedEnemies;
@@ -62,6 +63,7 @@ public class GameManeger : MonoBehaviour
     public GameObject LevelTrasintionCanvas;
     public GameObject ScoreCanvas;
     public GameObject LifeMenu;
+    public GameObject VCam;
 
     public GameObject LureGameObject;
     public List<GameObject> fillLure;
@@ -314,6 +316,29 @@ public class GameManeger : MonoBehaviour
     }
 
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            VCam.GetComponent<Transform>().position += new Vector3(0, 1, 0);
+        }
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            VCam.GetComponent<Transform>().position -= new Vector3(0, 1, 0);
+        }
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            Particles.GetComponent<Transform>().localScale += new Vector3(0.2f, 0.2f, 0.05f);
+            Enemy.minDist += 0.5f;
+        }
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            Particles.GetComponent<Transform>().localScale -= new Vector3(0.2f, 0.2f, 0.05f);
+            Enemy.minDist -= 0.5f;
+        }
+        camPosition = VCam.GetComponent<Transform>().position.y;
+    }
+
     private void FixedUpdate()
     {
         scoreText.text = totalScore.ToString();
@@ -377,13 +402,13 @@ public class GameManeger : MonoBehaviour
     {
 
         Vector3 unitCircle = Random.insideUnitCircle.normalized;
-        var spawnCircle = unitCircle * 19.5f;
+        var spawnCircle = unitCircle * 21f;
         Vector3 spawnPosition;
 
         if (isUnilateral)
         {
             var rangeX = Random.Range(-6f, 6f);
-            var rangeY = Random.Range(15f, 19.5f);
+            var rangeY = Random.Range(16.5f, 21f);
             spawnPosition = new Vector3(rangeX, 0.25f, toggle * rangeY);
         }
         else 
@@ -497,7 +522,7 @@ public class GameManeger : MonoBehaviour
     {
         Vector3 ran = Random.insideUnitCircle.normalized;
         ran *= Random.Range(0f, 10f);
-        var spawnPosition = new Vector3(ran.x, 15f, ran.y);
+        var spawnPosition = new Vector3(ran.x, camPosition - 5f, ran.y);
 
         Instantiate(Firework, spawnPosition, Quaternion.identity);
         countFirework++;
@@ -560,7 +585,7 @@ public class GameManeger : MonoBehaviour
     {
         Vector3 ran = Random.insideUnitCircle.normalized;
         ran *= 3f;
-        var spawnPosition = new Vector3(ran.x, 15f, ran.y);
+        var spawnPosition = new Vector3(ran.x, camPosition - 5f, ran.y);
 
         Instantiate(Firework, spawnPosition, Quaternion.identity);
 
@@ -597,8 +622,10 @@ public class GameManeger : MonoBehaviour
          content += "Multiplicador winStreak: " + winStreakMult + "x" + "\n";
          content += "Multiplicador de modularização da vida: " + modulHealthMult + "x" + "\n";
          content += "Multiplicador de modularização da velocidade: " + modulSpeedMult + "x" + "\n";
-         content += "Multiplicador total: " + scoreMultiplier + "x" + "\n";
-         content += "\nLog Date: " + System.DateTime.Now + "\n";
+         content += "Multiplicador total: " + scoreMultiplier + "x" + "\n\n";
+         content += "Distância de reconhecimento: " + Enemy.minDist + " (default = 2.5f)" + "\n";
+         content += "Altura da camêra: " + VCam.GetComponent<Transform>().position.y + "(default = 20)" + "\n\n";
+        content += "\nLog Date: " + System.DateTime.Now + "\n";
 
         //Add some text to it
         File.AppendAllText(path, content);

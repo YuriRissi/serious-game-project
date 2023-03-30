@@ -11,14 +11,12 @@ public class CoinDrop : MonoBehaviour
         transform.LeanMoveY(5f, 0.5f);
         transform.LeanRotateY(1200f, 1.5f);
         StartCoroutine(DestroyCoin());
-
     }
 
 
     void FixedUpdate()
     {
-        transform.Rotate(0, 5, 0, Space.World);
-        
+        transform.Rotate(0, 5, 0, Space.World);    
     }
 
     public IEnumerator DestroyCoin()
