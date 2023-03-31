@@ -273,7 +273,7 @@ public class GameManeger : MonoBehaviour
 
                 less40 = btw40n50 = btw50n60 = 2;
                 btw60n80 = more80 = 3;
-                levelMultiplier = 4 - repeatLevel;
+                levelMultiplier = 3 - repeatLevel;
 
                 repeatLevel = 1;
 
@@ -289,7 +289,7 @@ public class GameManeger : MonoBehaviour
 
                 less40 = btw40n50 = btw50n60 = 1;
                 btw60n80 = more80 = 2;
-                levelMultiplier = 5;
+                levelMultiplier = 7;
 
                 repeatLevel = 1;
 
@@ -337,6 +337,10 @@ public class GameManeger : MonoBehaviour
             Enemy.minDist -= 0.5f;
         }
         camPosition = VCam.GetComponent<Transform>().position.y;
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
     }
 
     private void FixedUpdate()
@@ -460,12 +464,14 @@ public class GameManeger : MonoBehaviour
         {
             GenerateTextData();
             Enemy.modularizedHealth -= 0.2f;
+            Enemy.modularizedSpeed -= 0.1f;
+            if (Enemy.modularizedHealth == 0.4f) gameLevel++;
             repeatLevel = 2;
         }
         else if(gameLevel == 17)
         {
-            totalScore = (totalScore - levelScore) + levelScore * 4;
-            levelScore *= 3;
+            totalScore = (totalScore - levelScore) + levelScore * 5;
+            levelScore *= 5;
             GenerateTextData();
         }
         else if (gameLevel > 15 || repeatLevel >= 3)
@@ -497,7 +503,7 @@ public class GameManeger : MonoBehaviour
         if (loseStreak == 1) Enemy.modularizedHealth -= 0.1f;
         if (loseStreak == 2) Enemy.modularizedSpeed -= 0.1f;
         winStreak = 0;
-        if (loseStreak >= 3)
+        if (loseStreak >= 3 || repeatLevel > 3)
         {
             GameOverMenu.SetActive(true);
             SetActiveGameInterface(false);
