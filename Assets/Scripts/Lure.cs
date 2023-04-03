@@ -59,6 +59,7 @@ public class Lure : MonoBehaviour
     {
         for (int i = 1; i <= damage; ++i)
         {
+            if (j >= Lifes.Count) yield break;
             Lifes[j].SetActive(false);
             health--;
             j++;

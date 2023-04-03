@@ -20,6 +20,6 @@ public class MediocreEnemy : Enemy
     {
         Vector3 dir = MoveDirection();
         MoveSpeed(rb, dir, 1.4f);
-        DistanceMonitoring(0.4f);
+        DistanceMonitoring(0.3f);
     }
 }

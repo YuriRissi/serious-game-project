@@ -1072,3 +1072,87 @@ Altura da camêra: 31(default = 20)
 
 
 Log Date: 02/04/2023 23:10:44
+
+
+Fase 1- SUCESSO
+
+isFinalLevel: False
+Pontuação no nível: 10
+Pontuação total: 10
+N.Inimigos: 6
+N.Inimigos simultâneos: 2
+Sequência de vitórias: 1
+Sequência de derrotas: 0
+N. Repetição de nível: 0
+Vidas restantes: 80%
+Modularização de vida: 1
+Modularização de velocidade: 1
+Tempo total: 0min 34sec 
+
+Multiplicador do nível: 0x
+Multiplicador winStreak: 0x
+Multiplicador de modularização da vida: 0x
+Multiplicador de modularização da velocidade: 0x
+Multiplicador total: 1x
+
+Distância de reconhecimento: 3 (default = 2.5f)
+Altura da camêra: 30(default = 20)
+
+
+Log Date: 03/04/2023 00:50:45
+
+
+Fase 1- SUCESSO
+
+isFinalLevel: False
+Pontuação no nível: 12
+Pontuação total: 12
+N.Inimigos: 6
+N.Inimigos simultâneos: 2
+Sequência de vitórias: 1
+Sequência de derrotas: 0
+N. Repetição de nível: 0
+Vidas restantes: 100%
+Modularização de vida: 1
+Modularização de velocidade: 1
+Tempo total: 0min 33sec 
+
+Multiplicador do nível: 0x
+Multiplicador winStreak: 0x
+Multiplicador de modularização da vida: 0x
+Multiplicador de modularização da velocidade: 0x
+Multiplicador total: 1x
+
+Distância de reconhecimento: 3 (default = 2.5f)
+Altura da camêra: 30(default = 20)
+
+
+Log Date: 03/04/2023 01:00:33
+
+
+Fase 1- SUCESSO
+
+isFinalLevel: False
+Pontuação no nível: 12
+Pontuação total: 12
+N.Inimigos: 6
+N.Inimigos simultâneos: 2
+Sequência de vitórias: 1
+Sequência de derrotas: 0
+N. Repetição de nível: 0
+Vidas restantes: 100%
+Modularização de vida: 1
+Modularização de velocidade: 1
+Tempo total: 0min 21sec 
+
+Multiplicador do nível: 0x
+Multiplicador winStreak: 0x
+Multiplicador de modularização da vida: 0x
+Multiplicador de modularização da velocidade: 0x
+Multiplicador total: 1x
+
+Distância de reconhecimento: 6 (default = 2.5f)
+Altura da camêra: 30(default = 20)
+
+
+Log Date: 03/04/2023 01:02:57

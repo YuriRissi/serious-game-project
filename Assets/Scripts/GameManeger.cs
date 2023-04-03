@@ -87,8 +87,8 @@ public class GameManeger : MonoBehaviour
         enemiesToSpawn = new List<GameObject>();
 
         Enemy.modularizedHealth = 1f;
-        Enemy.modularizedSpeed = 1f;
-        Enemy.minDist = 2.5f;
+        Enemy.modularizedSpeed = 0.8f;
+        Enemy.minDist = 3f;
 
 
         scoreText.text = "0";
@@ -335,12 +335,12 @@ public class GameManeger : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             Particles.GetComponent<Transform>().localScale += new Vector3(0.2f, 0.2f, 0.05f);
-            Enemy.minDist += 0.5f;
+            Enemy.minDist += 1.5f;
         }
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             Particles.GetComponent<Transform>().localScale -= new Vector3(0.2f, 0.2f, 0.05f);
-            Enemy.minDist += 0.5f;
+            Enemy.minDist -= 1.5f;
         }
         camPosition = VCam.GetComponent<Transform>().position.y;
     }
@@ -470,7 +470,7 @@ public class GameManeger : MonoBehaviour
             if (Enemy.modularizedHealth == 0.4f) gameLevel++;
             repeatLevel = 2;
         }
-        else if(gameLevel == 14 && levelIncrement == 7)
+        else if(gameLevel == 14 && levelIncrement == 2)
         {
             totalScore = (totalScore - levelScore) + levelScore * 5;
             levelScore *= 5;
@@ -635,8 +635,8 @@ public class GameManeger : MonoBehaviour
          content += "Multiplicador de modularização da vida: " + modulHealthMult + "x" + "\n";
          content += "Multiplicador de modularização da velocidade: " + modulSpeedMult + "x" + "\n";
          content += "Multiplicador total: " + scoreMultiplier + "x" + "\n\n";
-         content += "Distância de reconhecimento: " + Enemy.minDist + " (default = 2.5f)" + "\n";
-         content += "Altura da camêra: " + VCam.GetComponent<Transform>().position.y + "(default = 20)" + "\n\n";
+         content += "Distância de reconhecimento: " + Enemy.minDist + " (default = 3f)" + "\n";
+         content += "Altura da camêra: " + VCam.GetComponent<Transform>().position.y + "(default = 30)" + "\n\n";
          content += "\nLog Date: " + System.DateTime.Now + "\n";
 
         //Add some text to it

@@ -30,12 +30,12 @@ public class Interfaces : MonoBehaviour
             lifeInterface.GetComponent<RectTransform>().localPosition -= new Vector3(0, 10, 0);
             scoreInterface.GetComponent<RectTransform>().localPosition += new Vector3(0, 10, 0);
         }
-        if (Input.GetKeyDown(KeyCode.KeypadPlus))
+        if (Input.GetKeyDown(KeyCode.J))
         {
             lifeInterface.GetComponent<RectTransform>().localScale += new Vector3(0.05f, 0.05f, 0.05f);
             scoreInterface.GetComponent<RectTransform>().localScale += new Vector3(0.05f, 0.05f, 0.05f);
         }
-        if (Input.GetKeyDown(KeyCode.KeypadMinus))
+        if (Input.GetKeyDown(KeyCode.K))
         {
             lifeInterface.GetComponent<RectTransform>().localScale -= new Vector3(0.05f, 0.05f, 0.05f);
             scoreInterface.GetComponent<RectTransform>().localScale -= new Vector3(0.05f, 0.05f, 0.05f);
