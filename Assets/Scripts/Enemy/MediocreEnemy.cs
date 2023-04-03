@@ -10,6 +10,7 @@ public class MediocreEnemy : Enemy
     {
         rb = GetComponent<Rigidbody>();
 
+        type = "B";
         points = 4;
         maxHealth = 80;
         damage = 2;

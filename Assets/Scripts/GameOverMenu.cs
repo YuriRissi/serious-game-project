@@ -13,6 +13,13 @@ public class GameOverMenu : MonoBehaviour
         scoreText.text = GameManeger.totalScore.ToString();
         restart.gameObject.LeanScale(new Vector3(1.05f, 1.05f), 0.3f).setLoopPingPong();
     }
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            Restart();
+        }
+    }
     public void Restart()
     {
         GameManeger.Instance.RestartParameters();

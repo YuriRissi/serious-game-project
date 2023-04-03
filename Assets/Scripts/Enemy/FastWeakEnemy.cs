@@ -12,6 +12,7 @@ public class FastWeakEnemy : Enemy
     {
         rb = GetComponent<Rigidbody>();
 
+        type = "A";
         points = 3;
         maxHealth = 25;
         damage = 1;

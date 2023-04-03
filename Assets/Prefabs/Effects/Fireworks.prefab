@@ -4835,3 +4835,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fireworkMaterial: {fileID: 2100000, guid: 161e523f126fca4468f2284e964c3c65, type: 2}
+  ASFirework: {fileID: 0}
+  ASFireworkList:
+  - {fileID: 8300000, guid: 882c6819a5508d44e90938ef9ca10693, type: 3}
+  - {fileID: 8300000, guid: 9daedf36d873c3e41a83959283d67d88, type: 3}
+  - {fileID: 8300000, guid: af1a7cb31dfca444d9f6f57258f7d644, type: 3}
+  - {fileID: 8300000, guid: 27c681feb351f7a4c8ef9c0625809111, type: 3}
+  - {fileID: 8300000, guid: 97ee8f8b711d4684abfdbd063527b07d, type: 3}

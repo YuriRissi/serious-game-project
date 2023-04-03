@@ -242,8 +242,11 @@ MonoBehaviour:
   maxHealth: 0
   currentHealth: 0
   points: 0
+  damage: 0
+  type: 
   DropCoin: {fileID: 346971165993035744, guid: c5a892f3295bf3f4aa6eb9aefd1570b0, type: 3}
   healthBar: {fileID: 595526501929766222}
+  coinSound: {fileID: 7013837247686560966, guid: 4fa3ea4493643cf4d97608f9f0c7509f, type: 3}
 --- !u!1 &2384256792626890310
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,7 +13,10 @@ public class GameManeger : MonoBehaviour
     public static int totalScore;
     public static int levelScore;
     public static int gameLevel;
+    public static string levelDescription;
     public static float performance;
+    public static System.DateTime timeStartLevel;
+
 
     //Level modelation
     private int totalSpawn;
@@ -39,7 +42,6 @@ public class GameManeger : MonoBehaviour
     private int winStreak;
     private int loseStreak;
     private int repeatLevel;
-    private string levelDescription;
     private int levelMultiplier;
     private float scoreMultiplier;
     private float winStreakMult;
@@ -70,6 +72,7 @@ public class GameManeger : MonoBehaviour
     public GameObject Particles;
     public GameObject Firework;
 
+    public AudioSource fireWorksSoundEffect;
 
     private static GameManeger instance;
     private Coroutine spwanCoroutine;
@@ -90,6 +93,8 @@ public class GameManeger : MonoBehaviour
 
         scoreText.text = "0";
         toggle = 1;
+
+        Cursor.visible = false;
     }
 
     private void OnEnable()
@@ -289,7 +294,7 @@ public class GameManeger : MonoBehaviour
 
                 less40 = btw40n50 = btw50n60 = 1;
                 btw60n80 = more80 = 2;
-                levelMultiplier = 7;
+                levelMultiplier = 8;
 
                 repeatLevel = 1;
 
@@ -313,6 +318,7 @@ public class GameManeger : MonoBehaviour
         SetActiveGameInterface(true);
         spwanCoroutine = StartCoroutine(SpawnEnemys());
         isSpawnCourotineOn = true;
+        timeStartLevel = System.DateTime.Now;
     }
 
 
@@ -334,13 +340,9 @@ public class GameManeger : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             Particles.GetComponent<Transform>().localScale -= new Vector3(0.2f, 0.2f, 0.05f);
-            Enemy.minDist -= 0.5f;
+            Enemy.minDist += 0.5f;
         }
         camPosition = VCam.GetComponent<Transform>().position.y;
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            Application.Quit();
-        }
     }
 
     private void FixedUpdate()
@@ -375,6 +377,7 @@ public class GameManeger : MonoBehaviour
             if (!isFireworkCourotineOn)
             {        
                 StartCoroutine(SpawnFireworks((isFinalLevel ? 60 : 30)));
+                //fireWorksSoundEffect.Play();
                 isFireworkCourotineOn = true;
             }            
         }
@@ -443,7 +446,6 @@ public class GameManeger : MonoBehaviour
     private void EndLevel()
     {
         var levelIncrement = ModularizeRemainingLife(less40, btw40n50, btw50n60, btw60n80, more80);
-        gameLevel += levelIncrement;
 
         if (levelIncrement == 0)
         {
@@ -455,7 +457,7 @@ public class GameManeger : MonoBehaviour
         }
         loseStreak = 0;
 
-        if (gameLevel == 2)
+        if (gameLevel == 1 && levelIncrement == 1 )
         {
             winStreak--;
             GenerateTextData();
@@ -468,20 +470,22 @@ public class GameManeger : MonoBehaviour
             if (Enemy.modularizedHealth == 0.4f) gameLevel++;
             repeatLevel = 2;
         }
-        else if(gameLevel == 17)
+        else if(gameLevel == 14 && levelIncrement == 7)
         {
             totalScore = (totalScore - levelScore) + levelScore * 5;
             levelScore *= 5;
             GenerateTextData();
         }
-        else if (gameLevel > 15 || repeatLevel >= 3)
+        else if ((gameLevel + levelIncrement) > 15 || repeatLevel >= 3)
         {
             isFinalLevel = true;
             GenerateTextData();
         }
         else GenerateTextData();
 
-        if(performance >= 70) countIncrementModularization++;
+        gameLevel += levelIncrement;
+
+        if (performance >= 70) countIncrementModularization++;
         else countIncrementModularization = 0;
 
         if (countIncrementModularization == 2) Enemy.modularizedHealth += 0.2f;
@@ -503,7 +507,7 @@ public class GameManeger : MonoBehaviour
         if (loseStreak == 1) Enemy.modularizedHealth -= 0.1f;
         if (loseStreak == 2) Enemy.modularizedSpeed -= 0.1f;
         winStreak = 0;
-        if (loseStreak >= 3 || repeatLevel > 3)
+        if (loseStreak >= 3)
         {
             GameOverMenu.SetActive(true);
             SetActiveGameInterface(false);
@@ -604,7 +608,7 @@ public class GameManeger : MonoBehaviour
     public void GenerateTextData()
     {
         //Path of the file
-        string path = Application.dataPath + "/LOG.txt";
+        string path = Application.dataPath + "/data-collect.txt";
         //Create File if it doesn't exist
         if (!File.Exists(path))
         {
@@ -612,18 +616,20 @@ public class GameManeger : MonoBehaviour
         }
         //Content of the file
         string content = "";
-        if (gameLevel == 1) content = "\n\n-----------------Nova sessão-----------------n\n";
+        if (gameLevel == 2) content = "\n\n-----------------Nova sessão-----------------n\n";
          content += "\n\n" + levelDescription + "- " + (performance == 0f ? "DERROTA" : "SUCESSO") + "\n\n";
          content += "isFinalLevel: " + isFinalLevel + "\n";
          content += "Pontuação no nível: " + levelScore + "\n";
          content += "Pontuação total: " + totalScore + "\n";
          content += "N.Inimigos: " + totalSpawn + "\n";
-         content += "Sequência de vitórias: " + winStreak + "\n";
+         content += "N.Inimigos simultâneos: " + simultaneousAllowed + "\n";
+        content += "Sequência de vitórias: " + winStreak + "\n";
          content += "Sequência de derrotas: " + loseStreak + "\n";
          content += "N. Repetição de nível: " + repeatLevel + "\n";
          content += "Vidas restantes: " + performance + "%" + "\n";
          content += "Modularização de vida: " + Enemy.modularizedHealth + "\n";
          content += "Modularização de velocidade: " + Enemy.modularizedSpeed + "\n";
+         content += "Tempo total: " + (System.DateTime.Now - timeStartLevel).Minutes + "min " + (System.DateTime.Now - timeStartLevel).Seconds + "sec \n\n";
          content += "Multiplicador do nível: " + levelMultiplier + "x" + "\n";
          content += "Multiplicador winStreak: " + winStreakMult + "x" + "\n";
          content += "Multiplicador de modularização da vida: " + modulHealthMult + "x" + "\n";
@@ -631,7 +637,7 @@ public class GameManeger : MonoBehaviour
          content += "Multiplicador total: " + scoreMultiplier + "x" + "\n\n";
          content += "Distância de reconhecimento: " + Enemy.minDist + " (default = 2.5f)" + "\n";
          content += "Altura da camêra: " + VCam.GetComponent<Transform>().position.y + "(default = 20)" + "\n\n";
-        content += "\nLog Date: " + System.DateTime.Now + "\n";
+         content += "\nLog Date: " + System.DateTime.Now + "\n";
 
         //Add some text to it
         File.AppendAllText(path, content);

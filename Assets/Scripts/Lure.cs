@@ -12,6 +12,8 @@ public class Lure : MonoBehaviour
     private int j;
     private int damage;
     public static float percentageLifeRemaining;
+
+    public AudioSource ASTakeHit;
     void Start()
     {
         ResetGameLife();
@@ -22,20 +24,23 @@ public class Lure : MonoBehaviour
         if (collision.gameObject.CompareTag("Enemy"))
         {
             damage = GameManeger.Instance.GetEnemyDamage();
+            StartCoroutine(ApllyDamage(damage));
+
             cinemachineImpulseSource.GenerateImpulse();
-            for(int i = 1; i <= damage; ++i)
-            {
-                Lifes[j].SetActive(false);
-                health--;
-                j++;
-            }
+            ASTakeHit.Play();
+
             percentageLifeRemaining = (float)health / Lifes.Count;
+        }
+    }
 
-            if (health < 1)
-               {
-                GameManeger.Instance.GameOver();
-               }
-
+    public void Update()
+    {
+        if (health < 1)
+        {
+            percentageLifeRemaining = 0;
+            StopAllCoroutines();
+            ASTakeHit.Stop();
+            GameManeger.Instance.GameOver();
         }
     }
 
@@ -49,6 +54,17 @@ public class Lure : MonoBehaviour
         j = 0;
         percentageLifeRemaining = 1f;
         GameManeger.Instance.ListSetActive(Lifes, true);
+    }
+    private IEnumerator ApllyDamage(int damage)
+    {
+        for (int i = 1; i <= damage; ++i)
+        {
+            Lifes[j].SetActive(false);
+            health--;
+            j++;
+        }
+
+        yield break;
     }
 
 }

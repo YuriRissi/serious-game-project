@@ -10,6 +10,7 @@ public class SlowWeakEnemy : Enemy
     {
         rb = GetComponent<Rigidbody>();
 
+        type = "D";
         points = 2;
         maxHealth = 50;
         damage = 2;

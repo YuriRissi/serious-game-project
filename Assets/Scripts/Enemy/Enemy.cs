@@ -1,20 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 
 public class Enemy : MonoBehaviour
 {
     public static float modularizedSpeed;
     public static float modularizedHealth;
     public static float minDist;
+    private static string auxLevelD;
     
     public int maxHealth;
     public int currentHealth;
     public int points;
     public int damage;
+    public string type;
     
     private float slow;
     private float distanceEye;
+    
 
     public GameObject DropCoin;
     public HealthBar healthBar;
@@ -68,6 +72,7 @@ public class Enemy : MonoBehaviour
     {
         Vector3 position = transform.position;
         Instantiate(DropCoin, new Vector3(position.x, 1f, position.z), Quaternion.Euler(-90, 0, 0));
+        GenerateTextDeath();
         Destroy(gameObject);
         GameManeger.Instance.IncrementScore(points);
     }
@@ -75,5 +80,26 @@ public class Enemy : MonoBehaviour
     {
         currentHealth -= damage;
         healthBar.SetHealth(currentHealth);
+    }
+    public void GenerateTextDeath()
+    {
+        //Path of the file
+        string path = Application.dataPath + "/heat-map.txt";
+        //Create File if it doesn't exist
+        if (!File.Exists(path))
+        {
+            File.WriteAllText(path, "");
+        }
+        //Content of the file
+        string content = "";
+        if (auxLevelD != GameManeger.levelDescription || !LevelTrasintion.nextLevel)
+        {
+            content = "\n\n-----------------" + GameManeger.levelDescription + "-----------------\n";
+            auxLevelD = GameManeger.levelDescription;
+        }
+        content += gameObject.transform.position + " - " + type + " - " + (System.DateTime.Now - GameManeger.timeStartLevel).TotalSeconds + " sec\n";
+
+        //Add some text to it
+        File.AppendAllText(path, content);
     }
 }
