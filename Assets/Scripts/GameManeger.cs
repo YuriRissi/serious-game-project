@@ -82,13 +82,13 @@ public class GameManeger : MonoBehaviour
 
         instance = this;
 
-        gameLevel++;
         instantiatedEnemies = new GameObject[0];
         enemiesToSpawn = new List<GameObject>();
 
         Enemy.modularizedHealth = 1f;
         Enemy.modularizedSpeed = 0.8f;
         Enemy.minDist = 3f;
+        LevelTrasintion.nextLevel = true;
 
 
         scoreText.text = "0";
@@ -111,6 +111,14 @@ public class GameManeger : MonoBehaviour
 
         switch (gameLevel)
         {
+            case 0:
+
+                levelDescription = "CalibraÃ§Ã£o";
+
+                less40 = btw40n50 = btw50n60 = btw60n80 = more80 = 2;
+
+                break;
+
             case 1:
 
                 levelDescription = "Fase 1";
@@ -155,7 +163,7 @@ public class GameManeger : MonoBehaviour
 
             case 4:
 
-                levelDescription = "Fase 3 - Primeira repetição";
+                levelDescription = "Fase 3 - Primeira repetiï¿½ï¿½o";
 
                 BuildEnimiesToSpwanList(1, 0, 0, 0);
                 simultaneousAllowed = 2;
@@ -167,7 +175,7 @@ public class GameManeger : MonoBehaviour
 
             case 5:
 
-                levelDescription = "Fase 3 - Segunda repetição";
+                levelDescription = "Fase 3 - Segunda repetiï¿½ï¿½o";
 
                 BuildEnimiesToSpwanList(1, 0, 0, 0);
                 simultaneousAllowed = 2;
@@ -179,7 +187,7 @@ public class GameManeger : MonoBehaviour
 
             case 6:
 
-                levelDescription = "Fase 4 - Primeira repetição";
+                levelDescription = "Fase 4 - Primeira repetiï¿½ï¿½o";
 
                 BuildEnimiesToSpwanList(0, 0, 1, 0);
                 simultaneousAllowed = 1;
@@ -191,7 +199,7 @@ public class GameManeger : MonoBehaviour
 
             case 7:
 
-                levelDescription = "Fase 4 - Segunda repetição";
+                levelDescription = "Fase 4 - Segunda repetiï¿½ï¿½o";
 
                 BuildEnimiesToSpwanList(0, 0, 1, 0);
                 simultaneousAllowed = 1;
@@ -203,7 +211,7 @@ public class GameManeger : MonoBehaviour
 
             case 8:
 
-                levelDescription = "Fase 5 - Primeira repetição";
+                levelDescription = "Fase 5 - Primeira repetiï¿½ï¿½o";
 
                 BuildEnimiesToSpwanList(0, 1, 0, 0);
                 simultaneousAllowed = 2;
@@ -215,7 +223,7 @@ public class GameManeger : MonoBehaviour
 
             case 9:
 
-                levelDescription = "Fase 5 - Segunda repetição";
+                levelDescription = "Fase 5 - Segunda repetiï¿½ï¿½o";
 
                 BuildEnimiesToSpwanList(0, 1, 0, 0);
                 simultaneousAllowed = 2;
@@ -242,7 +250,7 @@ public class GameManeger : MonoBehaviour
             
             case 11:
 
-                levelDescription = "Fase 6 - Desempenho menor que 40% na última tentativa";
+                levelDescription = "Fase 6 - Desempenho menor que 40% na ï¿½ltima tentativa";
 
                 BuildEnimiesToSpwanList(2, 4, 0, 0);
                 simultaneousAllowed = 2;
@@ -257,7 +265,7 @@ public class GameManeger : MonoBehaviour
 
             case 12:
 
-                levelDescription = "Fase 6 - Desempenho menor que 60% na última tentativa";
+                levelDescription = "Fase 6 - Desempenho menor que 60% na ï¿½ltima tentativa";
 
                 BuildEnimiesToSpwanList(2, 4, 0, 1);
                 simultaneousAllowed = 1;
@@ -302,7 +310,7 @@ public class GameManeger : MonoBehaviour
 
             case 15:
 
-                levelDescription = "Fase 7 - Desempenho menor que 60% - repetir último nível;";
+                levelDescription = "Fase 7 - Desempenho menor que 60% - repetir ï¿½ltimo nï¿½vel;";
 
                 BuildEnimiesToSpwanList(2, 4, 1, 1);
                 simultaneousAllowed = 9;
@@ -316,9 +324,12 @@ public class GameManeger : MonoBehaviour
         }
 
         SetActiveGameInterface(true);
-        spwanCoroutine = StartCoroutine(SpawnEnemys());
-        isSpawnCourotineOn = true;
         timeStartLevel = System.DateTime.Now;
+        if(gameLevel != 0)
+        {
+            spwanCoroutine = StartCoroutine(SpawnEnemys());
+            isSpawnCourotineOn = true;
+        }
     }
 
 
@@ -377,7 +388,6 @@ public class GameManeger : MonoBehaviour
             if (!isFireworkCourotineOn)
             {        
                 StartCoroutine(SpawnFireworks((isFinalLevel ? 60 : 30)));
-                //fireWorksSoundEffect.Play();
                 isFireworkCourotineOn = true;
             }            
         }
@@ -457,6 +467,12 @@ public class GameManeger : MonoBehaviour
         }
         loseStreak = 0;
 
+        
+        if (gameLevel == 0)
+        {
+            winStreak--;
+            performance = 0;
+        }
         if (gameLevel == 1 && levelIncrement == 1 )
         {
             winStreak--;
@@ -616,27 +632,27 @@ public class GameManeger : MonoBehaviour
         }
         //Content of the file
         string content = "";
-        if (gameLevel == 2) content = "\n\n-----------------Nova sessão-----------------n\n";
+        if (gameLevel == 2) content = "\n\n-----------------Nova sessï¿½o-----------------n\n";
          content += "\n\n" + levelDescription + "- " + (performance == 0f ? "DERROTA" : "SUCESSO") + "\n\n";
          content += "isFinalLevel: " + isFinalLevel + "\n";
-         content += "Pontuação no nível: " + levelScore + "\n";
-         content += "Pontuação total: " + totalScore + "\n";
+         content += "Pontuaï¿½ï¿½o no nï¿½vel: " + levelScore + "\n";
+         content += "Pontuaï¿½ï¿½o total: " + totalScore + "\n";
          content += "N.Inimigos: " + totalSpawn + "\n";
-         content += "N.Inimigos simultâneos: " + simultaneousAllowed + "\n";
-        content += "Sequência de vitórias: " + winStreak + "\n";
-         content += "Sequência de derrotas: " + loseStreak + "\n";
-         content += "N. Repetição de nível: " + repeatLevel + "\n";
+         content += "N.Inimigos simultï¿½neos: " + simultaneousAllowed + "\n";
+        content += "Sequï¿½ncia de vitï¿½rias: " + winStreak + "\n";
+         content += "Sequï¿½ncia de derrotas: " + loseStreak + "\n";
+         content += "N. Repetiï¿½ï¿½o de nï¿½vel: " + repeatLevel + "\n";
          content += "Vidas restantes: " + performance + "%" + "\n";
-         content += "Modularização de vida: " + Enemy.modularizedHealth + "\n";
-         content += "Modularização de velocidade: " + Enemy.modularizedSpeed + "\n";
+         content += "Modularizaï¿½ï¿½o de vida: " + Enemy.modularizedHealth + "\n";
+         content += "Modularizaï¿½ï¿½o de velocidade: " + Enemy.modularizedSpeed + "\n";
          content += "Tempo total: " + (System.DateTime.Now - timeStartLevel).Minutes + "min " + (System.DateTime.Now - timeStartLevel).Seconds + "sec \n\n";
-         content += "Multiplicador do nível: " + levelMultiplier + "x" + "\n";
+         content += "Multiplicador do nï¿½vel: " + levelMultiplier + "x" + "\n";
          content += "Multiplicador winStreak: " + winStreakMult + "x" + "\n";
-         content += "Multiplicador de modularização da vida: " + modulHealthMult + "x" + "\n";
-         content += "Multiplicador de modularização da velocidade: " + modulSpeedMult + "x" + "\n";
+         content += "Multiplicador de modularizaï¿½ï¿½o da vida: " + modulHealthMult + "x" + "\n";
+         content += "Multiplicador de modularizaï¿½ï¿½o da velocidade: " + modulSpeedMult + "x" + "\n";
          content += "Multiplicador total: " + scoreMultiplier + "x" + "\n\n";
-         content += "Distância de reconhecimento: " + Enemy.minDist + " (default = 3f)" + "\n";
-         content += "Altura da camêra: " + VCam.GetComponent<Transform>().position.y + "(default = 30)" + "\n\n";
+         content += "Distï¿½ncia de reconhecimento: " + Enemy.minDist + " (default = 3f)" + "\n";
+         content += "Altura da camï¿½ra: " + VCam.GetComponent<Transform>().position.y + "(default = 30)" + "\n\n";
          content += "\nLog Date: " + System.DateTime.Now + "\n";
 
         //Add some text to it
