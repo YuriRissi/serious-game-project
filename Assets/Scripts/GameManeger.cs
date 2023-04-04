@@ -58,6 +58,7 @@ public class GameManeger : MonoBehaviour
     public List<GameObject> enemyB;
     public List<GameObject> enemyC;
     public List<GameObject> enemyD;
+    public List<GameObject> calibration;
 
     public GameObject MainMenu;
     public GameObject GameOverMenu;
@@ -115,7 +116,8 @@ public class GameManeger : MonoBehaviour
 
                 levelDescription = "Calibração";
 
-                less40 = btw40n50 = btw50n60 = btw60n80 = more80 = 2;
+                less40 = btw40n50 = btw50n60 = btw60n80 = more80 = 1;
+                ListSetActive(calibration, true);
 
                 break;
 
@@ -142,8 +144,6 @@ public class GameManeger : MonoBehaviour
                 totalSpawn = 6;
 
                 less40 = btw40n50 = btw50n60 = btw60n80 = more80 = 1;
-
-                repeatLevel++;
 
                 break;
 
@@ -259,8 +259,6 @@ public class GameManeger : MonoBehaviour
                 less40 = btw40n50 = btw50n60 = 1;
                 btw60n80 = more80 = 2;
 
-                repeatLevel =  1;
-
                 break;
 
             case 12:
@@ -288,8 +286,6 @@ public class GameManeger : MonoBehaviour
                 btw60n80 = more80 = 3;
                 levelMultiplier = 3 - repeatLevel;
 
-                repeatLevel = 1;
-
                 break;
 
             case 14:
@@ -303,8 +299,6 @@ public class GameManeger : MonoBehaviour
                 less40 = btw40n50 = btw50n60 = 1;
                 btw60n80 = more80 = 2;
                 levelMultiplier = 8;
-
-                repeatLevel = 1;
 
                 break;
 
@@ -457,17 +451,8 @@ public class GameManeger : MonoBehaviour
     {
         var levelIncrement = ModularizeRemainingLife(less40, btw40n50, btw50n60, btw60n80, more80);
 
-        if (levelIncrement == 0)
-        {
-            repeatLevel++;
-        }
-        else
-        {
-            winStreak++;
-        }
-        loseStreak = 0;
+        RepeatLevel(levelIncrement);
 
-        
         if (gameLevel == 0)
         {
             winStreak--;
@@ -481,15 +466,16 @@ public class GameManeger : MonoBehaviour
         else if (gameLevel == 3 && repeatLevel >= 3)
         {
             GenerateTextData();
-            Enemy.modularizedHealth -= 0.2f;
             Enemy.modularizedSpeed -= 0.1f;
+            Enemy.modularizedHealth -= 0.2f;
             if (Enemy.modularizedHealth == 0.4f) gameLevel++;
-            repeatLevel = 2;
+            repeatLevel = 0;
         }
         else if(gameLevel == 14 && levelIncrement == 2)
         {
-            totalScore = (totalScore - levelScore) + levelScore * 5;
-            levelScore *= 5;
+            totalScore = (totalScore - levelScore) + levelScore * 3;
+            levelScore *= 3;
+            isFinalLevel = true;
             GenerateTextData();
         }
         else if ((gameLevel + levelIncrement) > 15 || repeatLevel >= 3)
@@ -506,6 +492,22 @@ public class GameManeger : MonoBehaviour
 
         if (countIncrementModularization == 2) Enemy.modularizedHealth += 0.2f;
         if (countIncrementModularization == 3) Enemy.modularizedSpeed += 0.2f;
+    }
+
+    private void RepeatLevel(int levelIncrement)
+    {
+        if (gameLevel == 2) repeatLevel++;
+        else if (gameLevel == 10 && levelIncrement == 1) repeatLevel++;
+        else if (gameLevel == 11 && levelIncrement == 1) repeatLevel++;
+        else if (gameLevel == 13 && levelIncrement == 2) repeatLevel++;
+        else if (gameLevel == 14 && levelIncrement == 1) repeatLevel++;
+        else if (levelIncrement == 0) repeatLevel++;
+        else
+        {
+            winStreak++;
+            loseStreak = 0;
+            repeatLevel = 0;
+        }
     }
 
     public void GameOver()

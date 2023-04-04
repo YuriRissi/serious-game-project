@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4380141309313946065}
   - component: {fileID: 8398974380067247736}
   - component: {fileID: -2874686544046567552}
-  - component: {fileID: 3901428112086617093}
+  - component: {fileID: -8862650598586079171}
   m_Layer: 0
   m_Name: Drop
   m_TagString: Untagged
@@ -129,7 +129,7 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.0036882507
   m_Center: {x: 0, y: 0, z: 0}
---- !u!82 &3901428112086617093
+--- !u!82 &-8862650598586079171
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

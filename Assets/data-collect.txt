@@ -1156,3 +1156,199 @@ Altura da camêra: 30(default = 20)
 
 
 Log Date: 03/04/2023 01:02:57
+
+
+Calibração- DERROTA
+
+isFinalLevel: False
+Pontua��o no n�vel: 0
+Pontua��o total: 0
+N.Inimigos: 0
+N.Inimigos simult�neos: 0
+Sequ�ncia de vit�rias: 0
+Sequ�ncia de derrotas: 0
+N. Repeti��o de n�vel: 0
+Vidas restantes: 0%
+Modulariza��o de vida: 1
+Modulariza��o de velocidade: 0,8
+Tempo total: 0min 0sec 
+
+Multiplicador do n�vel: 0x
+Multiplicador winStreak: 0x
+Multiplicador de modulariza��o da vida: 0x
+Multiplicador de modulariza��o da velocidade: 0x
+Multiplicador total: 0x
+
+Dist�ncia de reconhecimento: 3 (default = 3f)
+Altura da cam�ra: 30(default = 30)
+
+
+Log Date: 03/04/2023 16:55:37
+
+
+Calibração- DERROTA
+
+isFinalLevel: False
+Pontua��o no n�vel: 0
+Pontua��o total: 0
+N.Inimigos: 0
+N.Inimigos simult�neos: 0
+Sequ�ncia de vit�rias: 0
+Sequ�ncia de derrotas: 0
+N. Repeti��o de n�vel: 0
+Vidas restantes: 0%
+Modulariza��o de vida: 1
+Modulariza��o de velocidade: 0,8
+Tempo total: 0min 0sec 
+
+Multiplicador do n�vel: 0x
+Multiplicador winStreak: 0x
+Multiplicador de modulariza��o da vida: 0x
+Multiplicador de modulariza��o da velocidade: 0x
+Multiplicador total: 0x
+
+Dist�ncia de reconhecimento: 3 (default = 3f)
+Altura da cam�ra: 30(default = 30)
+
+
+Log Date: 03/04/2023 16:59:11
+
+
+Calibração- DERROTA
+
+isFinalLevel: False
+Pontua��o no n�vel: 6
+Pontua��o total: 6
+N.Inimigos: 0
+N.Inimigos simult�neos: 0
+Sequ�ncia de vit�rias: 0
+Sequ�ncia de derrotas: 0
+N. Repeti��o de n�vel: 0
+Vidas restantes: 0%
+Modulariza��o de vida: 1
+Modulariza��o de velocidade: 0,8
+Tempo total: 0min 0sec 
+
+Multiplicador do n�vel: 0x
+Multiplicador winStreak: 0x
+Multiplicador de modulariza��o da vida: 0x
+Multiplicador de modulariza��o da velocidade: -0,4x
+Multiplicador total: 0,6x
+
+Dist�ncia de reconhecimento: 3 (default = 3f)
+Altura da cam�ra: 30(default = 30)
+
+
+Log Date: 03/04/2023 17:16:41
+
+
+Calibração- DERROTA
+
+isFinalLevel: False
+Pontua��o no n�vel: 6
+Pontua��o total: 6
+N.Inimigos: 0
+N.Inimigos simult�neos: 0
+Sequ�ncia de vit�rias: 0
+Sequ�ncia de derrotas: 0
+N. Repeti��o de n�vel: 0
+Vidas restantes: 0%
+Modulariza��o de vida: 1
+Modulariza��o de velocidade: 0,8
+Tempo total: 0min 0sec 
+
+Multiplicador do n�vel: 0x
+Multiplicador winStreak: 0x
+Multiplicador de modulariza��o da vida: 0x
+Multiplicador de modulariza��o da velocidade: -0,4x
+Multiplicador total: 0,6x
+
+Dist�ncia de reconhecimento: 3 (default = 3f)
+Altura da cam�ra: 30(default = 30)
+
+
+Log Date: 03/04/2023 17:24:48
+
+
+Calibração- DERROTA
+
+isFinalLevel: False
+Pontua��o no n�vel: 6
+Pontua��o total: 6
+N.Inimigos: 0
+N.Inimigos simult�neos: 0
+Sequ�ncia de vit�rias: 0
+Sequ�ncia de derrotas: 0
+N. Repeti��o de n�vel: 0
+Vidas restantes: 0%
+Modulariza��o de vida: 1
+Modulariza��o de velocidade: 0,8
+Tempo total: 0min 0sec 
+
+Multiplicador do n�vel: 0x
+Multiplicador winStreak: 0x
+Multiplicador de modulariza��o da vida: 0x
+Multiplicador de modulariza��o da velocidade: -0,4x
+Multiplicador total: 0,6x
+
+Dist�ncia de reconhecimento: 3 (default = 3f)
+Altura da cam�ra: 30(default = 30)
+
+
+Log Date: 03/04/2023 17:35:31
+
+
+Calibração- DERROTA
+
+isFinalLevel: False
+Pontua��o no n�vel: 11
+Pontua��o total: 11
+N.Inimigos: 0
+N.Inimigos simult�neos: 0
+Sequ�ncia de vit�rias: 0
+Sequ�ncia de derrotas: 0
+N. Repeti��o de n�vel: 0
+Vidas restantes: 0%
+Modulariza��o de vida: 1
+Modulariza��o de velocidade: 1
+Tempo total: 0min 30sec 
+
+Multiplicador do n�vel: 0x
+Multiplicador winStreak: 0x
+Multiplicador de modulariza��o da vida: 0x
+Multiplicador de modulariza��o da velocidade: 0x
+Multiplicador total: 1x
+
+Dist�ncia de reconhecimento: 3 (default = 3f)
+Altura da cam�ra: 30(default = 30)
+
+
+Log Date: 03/04/2023 17:40:59
+
+
+Calibração- DERROTA
+
+isFinalLevel: False
+Pontua��o no n�vel: 6
+Pontua��o total: 6
+N.Inimigos: 0
+N.Inimigos simult�neos: 0
+Sequ�ncia de vit�rias: 0
+Sequ�ncia de derrotas: 0
+N. Repeti��o de n�vel: 0
+Vidas restantes: 0%
+Modulariza��o de vida: 1
+Modulariza��o de velocidade: 0,8
+Tempo total: 0min 33sec 
+
+Multiplicador do n�vel: 0x
+Multiplicador winStreak: 0x
+Multiplicador de modulariza��o da vida: 0x
+Multiplicador de modulariza��o da velocidade: -0,4x
+Multiplicador total: 0,6x
+
+Dist�ncia de reconhecimento: 3 (default = 3f)
+Altura da cam�ra: 30(default = 30)
+
+
+Log Date: 03/04/2023 17:46:51
