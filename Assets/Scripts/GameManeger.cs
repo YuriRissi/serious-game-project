@@ -163,19 +163,19 @@ public class GameManeger : MonoBehaviour
 
             case 4:
 
-                levelDescription = "Fase 3 - Primeira repeti��o";
+                levelDescription = "Fase 3 - Primeira repetição";
 
                 BuildEnimiesToSpwanList(1, 0, 0, 0);
                 simultaneousAllowed = 2;
                 totalSpawn = 10;
 
                 less40 = btw40n50 = btw50n60 = btw60n80 = more80 = 1;
-                
+
                 break;
 
             case 5:
 
-                levelDescription = "Fase 3 - Segunda repeti��o";
+                levelDescription = "Fase 3 - Segunda repetição";
 
                 BuildEnimiesToSpwanList(1, 0, 0, 0);
                 simultaneousAllowed = 2;
@@ -187,7 +187,7 @@ public class GameManeger : MonoBehaviour
 
             case 6:
 
-                levelDescription = "Fase 4 - Primeira repeti��o";
+                levelDescription = "Fase 4 - Primeira repetição";
 
                 BuildEnimiesToSpwanList(0, 0, 1, 0);
                 simultaneousAllowed = 1;
@@ -199,7 +199,7 @@ public class GameManeger : MonoBehaviour
 
             case 7:
 
-                levelDescription = "Fase 4 - Segunda repeti��o";
+                levelDescription = "Fase 4 - Segunda repetição";
 
                 BuildEnimiesToSpwanList(0, 0, 1, 0);
                 simultaneousAllowed = 1;
@@ -211,7 +211,7 @@ public class GameManeger : MonoBehaviour
 
             case 8:
 
-                levelDescription = "Fase 5 - Primeira repeti��o";
+                levelDescription = "Fase 5 - Primeira repetição";
 
                 BuildEnimiesToSpwanList(0, 1, 0, 0);
                 simultaneousAllowed = 2;
@@ -223,7 +223,7 @@ public class GameManeger : MonoBehaviour
 
             case 9:
 
-                levelDescription = "Fase 5 - Segunda repeti��o";
+                levelDescription = "Fase 5 - Segunda repetição";
 
                 BuildEnimiesToSpwanList(0, 1, 0, 0);
                 simultaneousAllowed = 2;
@@ -241,16 +241,16 @@ public class GameManeger : MonoBehaviour
                 simultaneousAllowed = 2;
                 totalSpawn = 12;
 
-                less40 =  1;
+                less40 = 1;
                 btw40n50 = btw50n60 = 0;
                 btw60n80 = 3;
                 more80 = 4;
 
                 break;
-            
+
             case 11:
 
-                levelDescription = "Fase 6 - Desempenho menor que 40% na �ltima tentativa";
+                levelDescription = "Fase 6 - Desempenho menor que 40% na última tentativa";
 
                 BuildEnimiesToSpwanList(2, 4, 0, 0);
                 simultaneousAllowed = 2;
@@ -263,7 +263,7 @@ public class GameManeger : MonoBehaviour
 
             case 12:
 
-                levelDescription = "Fase 6 - Desempenho menor que 60% na �ltima tentativa";
+                levelDescription = "Fase 6 - Desempenho menor que 60% na última tentativa";
 
                 BuildEnimiesToSpwanList(2, 4, 0, 1);
                 simultaneousAllowed = 1;
@@ -304,7 +304,7 @@ public class GameManeger : MonoBehaviour
 
             case 15:
 
-                levelDescription = "Fase 7 - Desempenho menor que 60% - repetir �ltimo n�vel;";
+                levelDescription = "Fase 7 - Desempenho menor que 60% - repetir último nível;";
 
                 BuildEnimiesToSpwanList(2, 4, 1, 1);
                 simultaneousAllowed = 9;
@@ -319,7 +319,7 @@ public class GameManeger : MonoBehaviour
 
         SetActiveGameInterface(true);
         timeStartLevel = System.DateTime.Now;
-        if(gameLevel != 0)
+        if (gameLevel != 0)
         {
             spwanCoroutine = StartCoroutine(SpawnEnemys());
             isSpawnCourotineOn = true;
@@ -364,7 +364,7 @@ public class GameManeger : MonoBehaviour
 
         }
 
-        if(totalScore >= 50)
+        if (totalScore >= 50)
         {
             fillLure[0].SetActive(true);
         }
@@ -380,10 +380,10 @@ public class GameManeger : MonoBehaviour
             isEndLevelCalled = true;
 
             if (!isFireworkCourotineOn)
-            {        
+            {
                 StartCoroutine(SpawnFireworks((isFinalLevel ? 60 : 30)));
                 isFireworkCourotineOn = true;
-            }            
+            }
         }
 
         if (Enemy.modularizedHealth < 0.4f) Enemy.modularizedHealth = 0.4f;
@@ -422,12 +422,12 @@ public class GameManeger : MonoBehaviour
             var rangeY = Random.Range(16.5f, 21f);
             spawnPosition = new Vector3(rangeX, 0.25f, toggle * rangeY);
         }
-        else 
+        else
         {
-            spawnPosition = new Vector3(spawnCircle.x, 0.25f, spawnCircle.y); 
+            spawnPosition = new Vector3(spawnCircle.x, 0.25f, spawnCircle.y);
         }
-        
-        
+
+
         int index = Random.Range(0, enemiesToSpawn.Count);
 
         if (countSpawn == totalSpawn)
@@ -452,33 +452,38 @@ public class GameManeger : MonoBehaviour
         var levelIncrement = ModularizeRemainingLife(less40, btw40n50, btw50n60, btw60n80, more80);
 
         RepeatLevel(levelIncrement);
+        if (repeatLevel >= 3) isFinalLevel = true;
 
-        if (gameLevel == 0)
+            if (gameLevel == 0)
         {
             winStreak--;
             performance = 0;
         }
-        if (gameLevel == 1 && levelIncrement == 1 )
+        if (gameLevel == 1 && levelIncrement == 1)
         {
             winStreak--;
             GenerateTextData();
         }
-        else if (gameLevel == 3 && repeatLevel >= 3)
+        else if (gameLevel == 3 && repeatLevel >= 1)
         {
             GenerateTextData();
             Enemy.modularizedSpeed -= 0.1f;
             Enemy.modularizedHealth -= 0.2f;
-            if (Enemy.modularizedHealth == 0.4f) gameLevel++;
-            repeatLevel = 0;
+            if (isFinalLevel)
+            {
+                gameLevel++;
+                repeatLevel = 0;
+                isFinalLevel = false;
+            }
         }
-        else if(gameLevel == 14 && levelIncrement == 2)
+        else if (gameLevel == 14 && levelIncrement == 2)
         {
             totalScore = (totalScore - levelScore) + levelScore * 3;
             levelScore *= 3;
             isFinalLevel = true;
             GenerateTextData();
         }
-        else if ((gameLevel + levelIncrement) > 15 || repeatLevel >= 3)
+        else if ((gameLevel + levelIncrement) > 15)
         {
             isFinalLevel = true;
             GenerateTextData();
@@ -521,23 +526,28 @@ public class GameManeger : MonoBehaviour
         }
 
         loseStreak++;
-        repeatLevel++;
         if (loseStreak == 1) Enemy.modularizedHealth -= 0.1f;
         if (loseStreak == 2) Enemy.modularizedSpeed -= 0.1f;
+
+        repeatLevel++;
         winStreak = 0;
+
+        if (gameLevel == 1 || gameLevel == 10 || gameLevel == 11 || gameLevel == 13 || gameLevel == 14) gameLevel++;
+        if (gameLevel == 13 ) gameLevel += 2;
+
         if (loseStreak >= 3)
-        {
-            GameOverMenu.SetActive(true);
-            SetActiveGameInterface(false);
-            gameObject.SetActive(false);
-        }
-        else
-        {
-            LevelTrasintion.nextLevel = false;
-            LevelTrasintionCanvas.SetActive(true);
-            SetActiveGameInterface(false);
-            gameObject.SetActive(false);
-        }
+            {
+                GameOverMenu.SetActive(true);
+                SetActiveGameInterface(false);
+                gameObject.SetActive(false);
+            }
+            else
+            {
+                LevelTrasintion.nextLevel = false;
+                LevelTrasintionCanvas.SetActive(true);
+                SetActiveGameInterface(false);
+                gameObject.SetActive(false);
+            }
         GenerateTextData();
 
     }
@@ -634,27 +644,27 @@ public class GameManeger : MonoBehaviour
         }
         //Content of the file
         string content = "";
-        if (gameLevel == 2) content = "\n\n-----------------Nova sess�o-----------------n\n";
+        if (gameLevel == 2) content = "\n\n-----------------Nova sessão-----------------n\n";
          content += "\n\n" + levelDescription + "- " + (performance == 0f ? "DERROTA" : "SUCESSO") + "\n\n";
          content += "isFinalLevel: " + isFinalLevel + "\n";
-         content += "Pontua��o no n�vel: " + levelScore + "\n";
-         content += "Pontua��o total: " + totalScore + "\n";
+         content += "Pontuação no nível: " + levelScore + "\n";
+         content += "Pontuação total: " + totalScore + "\n";
          content += "N.Inimigos: " + totalSpawn + "\n";
-         content += "N.Inimigos simult�neos: " + simultaneousAllowed + "\n";
-        content += "Sequ�ncia de vit�rias: " + winStreak + "\n";
-         content += "Sequ�ncia de derrotas: " + loseStreak + "\n";
-         content += "N. Repeti��o de n�vel: " + repeatLevel + "\n";
+         content += "N.Inimigos simultâneos: " + simultaneousAllowed + "\n";
+        content += "Sequência de vitírias: " + winStreak + "\n";
+         content += "Sequência de derrotas: " + loseStreak + "\n";
+         content += "N. Repetição de nível: " + repeatLevel + "\n";
          content += "Vidas restantes: " + performance + "%" + "\n";
-         content += "Modulariza��o de vida: " + Enemy.modularizedHealth + "\n";
-         content += "Modulariza��o de velocidade: " + Enemy.modularizedSpeed + "\n";
+         content += "Modularização de vida: " + Enemy.modularizedHealth + "\n";
+         content += "Modularização de velocidade: " + Enemy.modularizedSpeed + "\n";
          content += "Tempo total: " + (System.DateTime.Now - timeStartLevel).Minutes + "min " + (System.DateTime.Now - timeStartLevel).Seconds + "sec \n\n";
-         content += "Multiplicador do n�vel: " + levelMultiplier + "x" + "\n";
+         content += "Multiplicador do nível: " + levelMultiplier + "x" + "\n";
          content += "Multiplicador winStreak: " + winStreakMult + "x" + "\n";
-         content += "Multiplicador de modulariza��o da vida: " + modulHealthMult + "x" + "\n";
-         content += "Multiplicador de modulariza��o da velocidade: " + modulSpeedMult + "x" + "\n";
+         content += "Multiplicador de modularização da vida: " + modulHealthMult + "x" + "\n";
+         content += "Multiplicador de modularização da velocidade: " + modulSpeedMult + "x" + "\n";
          content += "Multiplicador total: " + scoreMultiplier + "x" + "\n\n";
-         content += "Dist�ncia de reconhecimento: " + Enemy.minDist + " (default = 3f)" + "\n";
-         content += "Altura da cam�ra: " + VCam.GetComponent<Transform>().position.y + "(default = 30)" + "\n\n";
+         content += "Distância de reconhecimento: " + Enemy.minDist + " (default = 3f)" + "\n";
+         content += "Altura da camêra: " + VCam.GetComponent<Transform>().position.y + "(default = 30)" + "\n\n";
          content += "\nLog Date: " + System.DateTime.Now + "\n";
 
         //Add some text to it

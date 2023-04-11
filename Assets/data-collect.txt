@@ -1,0 +1,454 @@
+
+
+Calibração- DERROTA
+
+isFinalLevel: False
+Pontua��o no n�vel: 6
+Pontua��o total: 6
+N.Inimigos: 0
+N.Inimigos simult�neos: 0
+Sequ�ncia de vit�rias: 0
+Sequ�ncia de derrotas: 0
+N. Repeti��o de n�vel: 0
+Vidas restantes: 0%
+Modulariza��o de vida: 1
+Modulariza��o de velocidade: 0,8
+Tempo total: 0min 9sec 
+
+Multiplicador do n�vel: 0x
+Multiplicador winStreak: 0x
+Multiplicador de modulariza��o da vida: 0x
+Multiplicador de modulariza��o da velocidade: -0,4x
+Multiplicador total: 0,6x
+
+Dist�ncia de reconhecimento: 3 (default = 3f)
+Altura da cam�ra: 30(default = 30)
+
+
+Log Date: 03/04/2023 23:11:18
+
+
+Fase 1- SUCESSO
+
+isFinalLevel: False
+Pontua��o no n�vel: 2
+Pontua��o total: 8
+N.Inimigos: 6
+N.Inimigos simult�neos: 2
+Sequ�ncia de vit�rias: 0
+Sequ�ncia de derrotas: 0
+N. Repeti��o de n�vel: 0
+Vidas restantes: 20%
+Modulariza��o de vida: 1
+Modulariza��o de velocidade: 0,8
+Tempo total: 1min 9sec 
+
+Multiplicador do n�vel: 0x
+Multiplicador winStreak: 0x
+Multiplicador de modulariza��o da vida: 0x
+Multiplicador de modulariza��o da velocidade: -0,4x
+Multiplicador total: 0,6x
+
+Dist�ncia de reconhecimento: 3 (default = 3f)
+Altura da cam�ra: 30(default = 30)
+
+
+Log Date: 03/04/2023 23:12:45
+
+
+-----------------Nova sess�o-----------------n
+
+
+Fase 2 tipo X- SUCESSO
+
+isFinalLevel: False
+Pontua��o no n�vel: 6
+Pontua��o total: 14
+N.Inimigos: 6
+N.Inimigos simult�neos: 1
+Sequ�ncia de vit�rias: 0
+Sequ�ncia de derrotas: 0
+N. Repeti��o de n�vel: 1
+Vidas restantes: 100%
+Modulariza��o de vida: 1
+Modulariza��o de velocidade: 0,8
+Tempo total: 0min 41sec 
+
+Multiplicador do n�vel: 0x
+Multiplicador winStreak: 0x
+Multiplicador de modulariza��o da vida: 0x
+Multiplicador de modulariza��o da velocidade: -0,4x
+Multiplicador total: 0,6x
+
+Dist�ncia de reconhecimento: 3 (default = 3f)
+Altura da cam�ra: 30(default = 30)
+
+
+Log Date: 03/04/2023 23:13:44
+
+
+Fase 2 tipo Y- SUCESSO
+
+isFinalLevel: False
+Pontua��o no n�vel: 9
+Pontua��o total: 23
+N.Inimigos: 8
+N.Inimigos simult�neos: 2
+Sequ�ncia de vit�rias: 0
+Sequ�ncia de derrotas: 0
+N. Repeti��o de n�vel: 2
+Vidas restantes: 30%
+Modulariza��o de vida: 1
+Modulariza��o de velocidade: 0,8
+Tempo total: 1min 8sec 
+
+Multiplicador do n�vel: 1x
+Multiplicador winStreak: 0x
+Multiplicador de modulariza��o da vida: 0x
+Multiplicador de modulariza��o da velocidade: -0,4x
+Multiplicador total: 1,6x
+
+Dist�ncia de reconhecimento: 3 (default = 3f)
+Altura da cam�ra: 30(default = 30)
+
+
+Log Date: 03/04/2023 23:15:10
+
+
+Fase 2 tipo Y- SUCESSO
+
+isFinalLevel: False
+Pontua��o no n�vel: 11
+Pontua��o total: 34
+N.Inimigos: 8
+N.Inimigos simult�neos: 2
+Sequ�ncia de vit�rias: 1
+Sequ�ncia de derrotas: 0
+N. Repeti��o de n�vel: 0
+Vidas restantes: 100%
+Modulariza��o de vida: 1
+Modulariza��o de velocidade: 0,8
+Tempo total: 0min 38sec 
+
+Multiplicador do n�vel: 0x
+Multiplicador winStreak: 0x
+Multiplicador de modulariza��o da vida: 0x
+Multiplicador de modulariza��o da velocidade: -0,4x
+Multiplicador total: 0,6x
+
+Dist�ncia de reconhecimento: 3 (default = 3f)
+Altura da cam�ra: 30(default = 30)
+
+
+Log Date: 03/04/2023 23:16:06
+
+
+Fase 3 - Primeira repeti��o- SUCESSO
+
+isFinalLevel: False
+Pontua��o no n�vel: 20
+Pontua��o total: 54
+N.Inimigos: 10
+N.Inimigos simult�neos: 2
+Sequ�ncia de vit�rias: 2
+Sequ�ncia de derrotas: 0
+N. Repeti��o de n�vel: 0
+Vidas restantes: 100%
+Modulariza��o de vida: 1
+Modulariza��o de velocidade: 0,8
+Tempo total: 0min 38sec 
+
+Multiplicador do n�vel: 0x
+Multiplicador winStreak: 0,2x
+Multiplicador de modulariza��o da vida: 0x
+Multiplicador de modulariza��o da velocidade: -0,4x
+Multiplicador total: 0,8x
+
+Dist�ncia de reconhecimento: 3 (default = 3f)
+Altura da cam�ra: 30(default = 30)
+
+
+Log Date: 03/04/2023 23:17:03
+
+
+Fase 3 - Segunda repeti��o- SUCESSO
+
+isFinalLevel: False
+Pontua��o no n�vel: 40
+Pontua��o total: 94
+N.Inimigos: 10
+N.Inimigos simult�neos: 2
+Sequ�ncia de vit�rias: 3
+Sequ�ncia de derrotas: 0
+N. Repeti��o de n�vel: 0
+Vidas restantes: 100%
+Modulariza��o de vida: 1,2
+Modulariza��o de velocidade: 0,8
+Tempo total: 0min 30sec 
+
+Multiplicador do n�vel: 0x
+Multiplicador winStreak: 0,4x
+Multiplicador de modulariza��o da vida: 0,4000001x
+Multiplicador de modulariza��o da velocidade: -0,4x
+Multiplicador total: 1,4x
+
+Dist�ncia de reconhecimento: 3 (default = 3f)
+Altura da cam�ra: 30(default = 30)
+
+
+Log Date: 03/04/2023 23:17:50
+
+
+Fase 4 - Primeira repeti��o- SUCESSO
+
+isFinalLevel: False
+Pontua��o no n�vel: 30
+Pontua��o total: 124
+N.Inimigos: 3
+N.Inimigos simult�neos: 1
+Sequ�ncia de vit�rias: 4
+Sequ�ncia de derrotas: 0
+N. Repeti��o de n�vel: 0
+Vidas restantes: 100%
+Modulariza��o de vida: 1,2
+Modulariza��o de velocidade: 1
+Tempo total: 0min 33sec 
+
+Multiplicador do n�vel: 0x
+Multiplicador winStreak: 0,6x
+Multiplicador de modulariza��o da vida: 0,4000001x
+Multiplicador de modulariza��o da velocidade: 0x
+Multiplicador total: 2x
+
+Dist�ncia de reconhecimento: 3 (default = 3f)
+Altura da cam�ra: 30(default = 30)
+
+
+Log Date: 03/04/2023 23:18:41
+
+
+Fase 4 - Segunda repeti��o- SUCESSO
+
+isFinalLevel: False
+Pontua��o no n�vel: 33
+Pontua��o total: 157
+N.Inimigos: 3
+N.Inimigos simult�neos: 1
+Sequ�ncia de vit�rias: 5
+Sequ�ncia de derrotas: 0
+N. Repeti��o de n�vel: 0
+Vidas restantes: 100%
+Modulariza��o de vida: 1,2
+Modulariza��o de velocidade: 1
+Tempo total: 0min 25sec 
+
+Multiplicador do n�vel: 0x
+Multiplicador winStreak: 0,8x
+Multiplicador de modulariza��o da vida: 0,4000001x
+Multiplicador de modulariza��o da velocidade: 0x
+Multiplicador total: 2,2x
+
+Dist�ncia de reconhecimento: 3 (default = 3f)
+Altura da cam�ra: 30(default = 30)
+
+
+Log Date: 03/04/2023 23:19:24
+
+
+Fase 5 - Primeira repeti��o- SUCESSO
+
+isFinalLevel: False
+Pontua��o no n�vel: 70
+Pontua��o total: 227
+N.Inimigos: 7
+N.Inimigos simult�neos: 2
+Sequ�ncia de vit�rias: 6
+Sequ�ncia de derrotas: 0
+N. Repeti��o de n�vel: 0
+Vidas restantes: 100%
+Modulariza��o de vida: 1,2
+Modulariza��o de velocidade: 1
+Tempo total: 0min 27sec 
+
+Multiplicador do n�vel: 0x
+Multiplicador winStreak: 1x
+Multiplicador de modulariza��o da vida: 0,4000001x
+Multiplicador de modulariza��o da velocidade: 0x
+Multiplicador total: 2,4x
+
+Dist�ncia de reconhecimento: 3 (default = 3f)
+Altura da cam�ra: 30(default = 30)
+
+
+Log Date: 03/04/2023 23:20:09
+
+
+Fase 5 - Segunda repeti��o- SUCESSO
+
+isFinalLevel: False
+Pontua��o no n�vel: 50
+Pontua��o total: 277
+N.Inimigos: 7
+N.Inimigos simult�neos: 2
+Sequ�ncia de vit�rias: 7
+Sequ�ncia de derrotas: 0
+N. Repeti��o de n�vel: 0
+Vidas restantes: 60%
+Modulariza��o de vida: 1,2
+Modulariza��o de velocidade: 1
+Tempo total: 0min 46sec 
+
+Multiplicador do n�vel: 0x
+Multiplicador winStreak: 1,2x
+Multiplicador de modulariza��o da vida: 0,4000001x
+Multiplicador de modulariza��o da velocidade: 0x
+Multiplicador total: 2,6x
+
+Dist�ncia de reconhecimento: 3 (default = 3f)
+Altura da cam�ra: 30(default = 30)
+
+
+Log Date: 03/04/2023 23:21:14
+
+
+Fase 6 - Default- DERROTA
+
+isFinalLevel: False
+Pontua��o no n�vel: 0
+Pontua��o total: 277
+N.Inimigos: 12
+N.Inimigos simult�neos: 2
+Sequ�ncia de vit�rias: 0
+Sequ�ncia de derrotas: 1
+N. Repeti��o de n�vel: 1
+Vidas restantes: 0%
+Modulariza��o de vida: 1,1
+Modulariza��o de velocidade: 1
+Tempo total: 0min 54sec 
+
+Multiplicador do n�vel: 0x
+Multiplicador winStreak: 1,2x
+Multiplicador de modulariza��o da vida: 0,4000001x
+Multiplicador de modulariza��o da velocidade: 0x
+Multiplicador total: 2,6x
+
+Dist�ncia de reconhecimento: 3 (default = 3f)
+Altura da cam�ra: 30(default = 30)
+
+
+Log Date: 03/04/2023 23:22:26
+
+
+Fase 6 - Default- SUCESSO
+
+isFinalLevel: False
+Pontua��o no n�vel: 33
+Pontua��o total: 310
+N.Inimigos: 12
+N.Inimigos simult�neos: 2
+Sequ�ncia de vit�rias: 0
+Sequ�ncia de derrotas: 1
+N. Repeti��o de n�vel: 2
+Vidas restantes: 20%
+Modulariza��o de vida: 1,1
+Modulariza��o de velocidade: 1
+Tempo total: 1min 1sec 
+
+Multiplicador do n�vel: 0x
+Multiplicador winStreak: 0x
+Multiplicador de modulariza��o da vida: 0,2x
+Multiplicador de modulariza��o da velocidade: 0x
+Multiplicador total: 1,2x
+
+Dist�ncia de reconhecimento: 4,5 (default = 3f)
+Altura da cam�ra: 30(default = 30)
+
+
+Log Date: 03/04/2023 23:23:38
+
+
+Fase 6 - Desempenho menor que 40% na �ltima tentativa- SUCESSO
+
+isFinalLevel: True
+Pontua��o no n�vel: 25
+Pontua��o total: 335
+N.Inimigos: 9
+N.Inimigos simult�neos: 2
+Sequ�ncia de vit�rias: 0
+Sequ�ncia de derrotas: 1
+N. Repeti��o de n�vel: 3
+Vidas restantes: 30%
+Modulariza��o de vida: 1,1
+Modulariza��o de velocidade: 1
+Tempo total: 0min 47sec 
+
+Multiplicador do n�vel: 0x
+Multiplicador winStreak: 0x
+Multiplicador de modulariza��o da vida: 0,2x
+Multiplicador de modulariza��o da velocidade: 0x
+Multiplicador total: 1,2x
+
+Dist�ncia de reconhecimento: 4,5 (default = 3f)
+Altura da cam�ra: 30(default = 30)
+
+
+Log Date: 03/04/2023 23:24:43
+
+
+Calibração- DERROTA
+
+isFinalLevel: False
+Pontua��o no n�vel: 6
+Pontua��o total: 6
+N.Inimigos: 0
+N.Inimigos simult�neos: 0
+Sequ�ncia de vit�rias: 0
+Sequ�ncia de derrotas: 0
+N. Repeti��o de n�vel: 0
+Vidas restantes: 0%
+Modulariza��o de vida: 1
+Modulariza��o de velocidade: 0,8
+Tempo total: 0min 6sec 
+
+Multiplicador do n�vel: 0x
+Multiplicador winStreak: 0x
+Multiplicador de modulariza��o da vida: 0x
+Multiplicador de modulariza��o da velocidade: -0,4x
+Multiplicador total: 0,6x
+
+Dist�ncia de reconhecimento: 3 (default = 3f)
+Altura da cam�ra: 30(default = 30)
+
+
+Log Date: 03/04/2023 23:34:41
+
+
+-----------------Nova sess�o-----------------n
+
+
+Fase 1- DERROTA
+
+isFinalLevel: False
+Pontua��o no n�vel: 0
+Pontua��o total: 6
+N.Inimigos: 6
+N.Inimigos simult�neos: 2
+Sequ�ncia de vit�rias: 0
+Sequ�ncia de derrotas: 1
+N. Repeti��o de n�vel: 1
+Vidas restantes: 0%
+Modulariza��o de vida: 0,9
+Modulariza��o de velocidade: 0,8
+Tempo total: 1min 19sec 
+
+Multiplicador do n�vel: 0x
+Multiplicador winStreak: 0x
+Multiplicador de modulariza��o da vida: 0x
+Multiplicador de modulariza��o da velocidade: -0,4x
+Multiplicador total: 0,6x
+
+Dist�ncia de reconhecimento: 0 (default = 3f)
+Altura da cam�ra: 30(default = 30)
+
+
+Log Date: 03/04/2023 23:36:19
